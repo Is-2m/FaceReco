@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="FaceRec">
+  <DataContextMoniker Name="/FaceRecDataContext" />
+  <nestedChildShapes>
+    <classShape Id="f0f6eaa3-6689-4298-a8d5-f26b66839796" absoluteBounds="1.875, 1.125, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/FaceRecDataContext/Filier" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bbed097e-d35a-4d4e-bb3a-bc7d0bf5125a" absoluteBounds="1.8900000000000001, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fdeb1b45-cd18-47b7-8a78-4f584f015dbb" absoluteBounds="5.25, 3.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/FaceRecDataContext/Stagiaire" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d6e9ef12-30d8-4dba-83a0-7c6500575cb7" absoluteBounds="5.265, 3.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0f1f1942-82f1-46c1-b26e-597ecbed2b0b" absoluteBounds="5.375, 1.125, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/FaceRecDataContext/Groupe" />
+      <nestedChildShapes>
+        <elementListCompartment Id="37d7d74a-2f55-4eec-a3b6-ea0ae0a9a48f" absoluteBounds="5.3900000000000006, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.3125 : 2.5112939453125); (6.3125 : 3.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FaceRecDataContext/Groupe/Groupe_Stagiaire" />
+      <nodes>
+        <classShapeMoniker Id="0f1f1942-82f1-46c1-b26e-597ecbed2b0b" />
+        <classShapeMoniker Id="fdeb1b45-cd18-47b7-8a78-4f584f015dbb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.875 : 1.81814697265625); (5.375 : 1.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FaceRecDataContext/Filier/Filier_Groupe" />
+      <nodes>
+        <classShapeMoniker Id="f0f6eaa3-6689-4298-a8d5-f26b66839796" />
+        <classShapeMoniker Id="0f1f1942-82f1-46c1-b26e-597ecbed2b0b" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

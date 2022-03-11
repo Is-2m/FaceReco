@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FaceRec" Class="FaceRecDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLExpress;Initial Catalog=FaceRec;Integrated Security=True" SettingsObjectName="FaceReco.Properties.Settings" SettingsPropertyName="FaceRecConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Filier" Member="Filiers">
+    <Type Name="Filier">
+      <Column Name="idF" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nomF" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="intitule" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="Filier_Groupe" Member="Groupes" ThisKey="idF" OtherKey="idF" Type="Groupe" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stagiaire" Member="Stagiaires">
+    <Type Name="Stagiaire">
+      <Column Name="CEF" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cin" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="nom" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="prenom" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ville" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="adresse" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="idG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Groupe_Stagiaire" Member="Groupe" ThisKey="idG" OtherKey="idG" Type="Groupe" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Groupe" Member="Groupes">
+    <Type Name="Groupe">
+      <Column Name="idG" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="numG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idF" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Groupe_Stagiaire" Member="Stagiaires" ThisKey="idG" OtherKey="idG" Type="Stagiaire" />
+      <Association Name="Filier_Groupe" Member="Filier" ThisKey="idF" OtherKey="idF" Type="Filier" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
