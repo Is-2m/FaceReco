@@ -8,6 +8,30 @@
       <Association Name="Filier_Groupe" Member="Groupes" ThisKey="idF" OtherKey="idF" Type="Groupe" />
     </Type>
   </Table>
+  <Table Name="dbo.stagiaireEncod" Member="stagiaireEncods">
+    <Type Name="stagiaireEncod">
+      <Column Name="cef" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="stringEncod" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Stagiaire_stagiaireEncod" Member="Stagiaire" ThisKey="cef" OtherKey="CEF" Type="Stagiaire" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Groupe" Member="Groupes">
+    <Type Name="Groupe">
+      <Column Name="idG" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="numG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idF" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Groupe_Stagiaire" Member="Stagiaires" ThisKey="idG" OtherKey="idG" Type="Stagiaire" />
+      <Association Name="Filier_Groupe" Member="Filier" ThisKey="idF" OtherKey="idF" Type="Filier" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.presenceHistory" Member="presenceHistories">
+    <Type Name="presenceHistory">
+      <Column Name="idHistory" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cef" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="dateHistory" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Stagiaire_presenceHistory" Member="Stagiaire" ThisKey="cef" OtherKey="CEF" Type="Stagiaire" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Stagiaire" Member="Stagiaires">
     <Type Name="Stagiaire">
       <Column Name="CEF" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -17,16 +41,9 @@
       <Column Name="ville" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
       <Column Name="adresse" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
       <Column Name="idG" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Groupe_Stagiaire" Member="Groupe" ThisKey="idG" OtherKey="idG" Type="Groupe" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Groupe" Member="Groupes">
-    <Type Name="Groupe">
-      <Column Name="idG" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="numG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idF" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Groupe_Stagiaire" Member="Stagiaires" ThisKey="idG" OtherKey="idG" Type="Stagiaire" />
-      <Association Name="Filier_Groupe" Member="Filier" ThisKey="idF" OtherKey="idF" Type="Filier" IsForeignKey="true" />
+      <Association Name="Stagiaire_stagiaireEncod" Member="stagiaireEncod" ThisKey="CEF" OtherKey="cef" Type="stagiaireEncod" Cardinality="One" />
+      <Association Name="Stagiaire_presenceHistory" Member="presenceHistories" ThisKey="CEF" OtherKey="cef" Type="presenceHistory" />
+      <Association Name="Groupe_Stagiaire" Member="Groupe" ThisKey="idG" OtherKey="idG" Type="Groupe" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

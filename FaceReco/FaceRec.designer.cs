@@ -33,12 +33,18 @@ namespace FaceReco
     partial void InsertFilier(Filier instance);
     partial void UpdateFilier(Filier instance);
     partial void DeleteFilier(Filier instance);
-    partial void InsertStagiaire(Stagiaire instance);
-    partial void UpdateStagiaire(Stagiaire instance);
-    partial void DeleteStagiaire(Stagiaire instance);
+    partial void InsertstagiaireEncod(stagiaireEncod instance);
+    partial void UpdatestagiaireEncod(stagiaireEncod instance);
+    partial void DeletestagiaireEncod(stagiaireEncod instance);
     partial void InsertGroupe(Groupe instance);
     partial void UpdateGroupe(Groupe instance);
     partial void DeleteGroupe(Groupe instance);
+    partial void InsertpresenceHistory(presenceHistory instance);
+    partial void UpdatepresenceHistory(presenceHistory instance);
+    partial void DeletepresenceHistory(presenceHistory instance);
+    partial void InsertStagiaire(Stagiaire instance);
+    partial void UpdateStagiaire(Stagiaire instance);
+    partial void DeleteStagiaire(Stagiaire instance);
     #endregion
 		
 		public FaceRecDataContext() : 
@@ -79,11 +85,11 @@ namespace FaceReco
 			}
 		}
 		
-		public System.Data.Linq.Table<Stagiaire> Stagiaires
+		public System.Data.Linq.Table<stagiaireEncod> stagiaireEncods
 		{
 			get
 			{
-				return this.GetTable<Stagiaire>();
+				return this.GetTable<stagiaireEncod>();
 			}
 		}
 		
@@ -92,6 +98,22 @@ namespace FaceReco
 			get
 			{
 				return this.GetTable<Groupe>();
+			}
+		}
+		
+		public System.Data.Linq.Table<presenceHistory> presenceHistories
+		{
+			get
+			{
+				return this.GetTable<presenceHistory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Stagiaire> Stagiaires
+		{
+			get
+			{
+				return this.GetTable<Stagiaire>();
 			}
 		}
 	}
@@ -234,6 +256,463 @@ namespace FaceReco
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.stagiaireEncod")]
+	public partial class stagiaireEncod : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _cef;
+		
+		private string _stringEncod;
+		
+		private EntityRef<Stagiaire> _Stagiaire;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncefChanging(long value);
+    partial void OncefChanged();
+    partial void OnstringEncodChanging(string value);
+    partial void OnstringEncodChanged();
+    #endregion
+		
+		public stagiaireEncod()
+		{
+			this._Stagiaire = default(EntityRef<Stagiaire>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cef", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long cef
+		{
+			get
+			{
+				return this._cef;
+			}
+			set
+			{
+				if ((this._cef != value))
+				{
+					if (this._Stagiaire.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncefChanging(value);
+					this.SendPropertyChanging();
+					this._cef = value;
+					this.SendPropertyChanged("cef");
+					this.OncefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stringEncod", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string stringEncod
+		{
+			get
+			{
+				return this._stringEncod;
+			}
+			set
+			{
+				if ((this._stringEncod != value))
+				{
+					this.OnstringEncodChanging(value);
+					this.SendPropertyChanging();
+					this._stringEncod = value;
+					this.SendPropertyChanged("stringEncod");
+					this.OnstringEncodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stagiaire_stagiaireEncod", Storage="_Stagiaire", ThisKey="cef", OtherKey="CEF", IsForeignKey=true)]
+		public Stagiaire Stagiaire
+		{
+			get
+			{
+				return this._Stagiaire.Entity;
+			}
+			set
+			{
+				Stagiaire previousValue = this._Stagiaire.Entity;
+				if (((previousValue != value) 
+							|| (this._Stagiaire.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Stagiaire.Entity = null;
+						previousValue.stagiaireEncod = null;
+					}
+					this._Stagiaire.Entity = value;
+					if ((value != null))
+					{
+						value.stagiaireEncod = this;
+						this._cef = value.CEF;
+					}
+					else
+					{
+						this._cef = default(long);
+					}
+					this.SendPropertyChanged("Stagiaire");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Groupe")]
+	public partial class Groupe : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idG;
+		
+		private int _numG;
+		
+		private System.Nullable<int> _idF;
+		
+		private EntitySet<Stagiaire> _Stagiaires;
+		
+		private EntityRef<Filier> _Filier;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidGChanging(int value);
+    partial void OnidGChanged();
+    partial void OnnumGChanging(int value);
+    partial void OnnumGChanged();
+    partial void OnidFChanging(System.Nullable<int> value);
+    partial void OnidFChanged();
+    #endregion
+		
+		public Groupe()
+		{
+			this._Stagiaires = new EntitySet<Stagiaire>(new Action<Stagiaire>(this.attach_Stagiaires), new Action<Stagiaire>(this.detach_Stagiaires));
+			this._Filier = default(EntityRef<Filier>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idG", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idG
+		{
+			get
+			{
+				return this._idG;
+			}
+			set
+			{
+				if ((this._idG != value))
+				{
+					this.OnidGChanging(value);
+					this.SendPropertyChanging();
+					this._idG = value;
+					this.SendPropertyChanged("idG");
+					this.OnidGChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numG", DbType="Int NOT NULL")]
+		public int numG
+		{
+			get
+			{
+				return this._numG;
+			}
+			set
+			{
+				if ((this._numG != value))
+				{
+					this.OnnumGChanging(value);
+					this.SendPropertyChanging();
+					this._numG = value;
+					this.SendPropertyChanged("numG");
+					this.OnnumGChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idF", DbType="Int")]
+		public System.Nullable<int> idF
+		{
+			get
+			{
+				return this._idF;
+			}
+			set
+			{
+				if ((this._idF != value))
+				{
+					if (this._Filier.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidFChanging(value);
+					this.SendPropertyChanging();
+					this._idF = value;
+					this.SendPropertyChanged("idF");
+					this.OnidFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Groupe_Stagiaire", Storage="_Stagiaires", ThisKey="idG", OtherKey="idG")]
+		public EntitySet<Stagiaire> Stagiaires
+		{
+			get
+			{
+				return this._Stagiaires;
+			}
+			set
+			{
+				this._Stagiaires.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Filier_Groupe", Storage="_Filier", ThisKey="idF", OtherKey="idF", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Filier Filier
+		{
+			get
+			{
+				return this._Filier.Entity;
+			}
+			set
+			{
+				Filier previousValue = this._Filier.Entity;
+				if (((previousValue != value) 
+							|| (this._Filier.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Filier.Entity = null;
+						previousValue.Groupes.Remove(this);
+					}
+					this._Filier.Entity = value;
+					if ((value != null))
+					{
+						value.Groupes.Add(this);
+						this._idF = value.idF;
+					}
+					else
+					{
+						this._idF = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Filier");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Stagiaires(Stagiaire entity)
+		{
+			this.SendPropertyChanging();
+			entity.Groupe = this;
+		}
+		
+		private void detach_Stagiaires(Stagiaire entity)
+		{
+			this.SendPropertyChanging();
+			entity.Groupe = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.presenceHistory")]
+	public partial class presenceHistory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idHistory;
+		
+		private System.Nullable<long> _cef;
+		
+		private System.DateTime _dateHistory;
+		
+		private EntityRef<Stagiaire> _Stagiaire;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidHistoryChanging(int value);
+    partial void OnidHistoryChanged();
+    partial void OncefChanging(System.Nullable<long> value);
+    partial void OncefChanged();
+    partial void OndateHistoryChanging(System.DateTime value);
+    partial void OndateHistoryChanged();
+    #endregion
+		
+		public presenceHistory()
+		{
+			this._Stagiaire = default(EntityRef<Stagiaire>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idHistory", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idHistory
+		{
+			get
+			{
+				return this._idHistory;
+			}
+			set
+			{
+				if ((this._idHistory != value))
+				{
+					this.OnidHistoryChanging(value);
+					this.SendPropertyChanging();
+					this._idHistory = value;
+					this.SendPropertyChanged("idHistory");
+					this.OnidHistoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cef", DbType="BigInt")]
+		public System.Nullable<long> cef
+		{
+			get
+			{
+				return this._cef;
+			}
+			set
+			{
+				if ((this._cef != value))
+				{
+					if (this._Stagiaire.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncefChanging(value);
+					this.SendPropertyChanging();
+					this._cef = value;
+					this.SendPropertyChanged("cef");
+					this.OncefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateHistory", DbType="Date NOT NULL")]
+		public System.DateTime dateHistory
+		{
+			get
+			{
+				return this._dateHistory;
+			}
+			set
+			{
+				if ((this._dateHistory != value))
+				{
+					this.OndateHistoryChanging(value);
+					this.SendPropertyChanging();
+					this._dateHistory = value;
+					this.SendPropertyChanged("dateHistory");
+					this.OndateHistoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stagiaire_presenceHistory", Storage="_Stagiaire", ThisKey="cef", OtherKey="CEF", IsForeignKey=true)]
+		public Stagiaire Stagiaire
+		{
+			get
+			{
+				return this._Stagiaire.Entity;
+			}
+			set
+			{
+				Stagiaire previousValue = this._Stagiaire.Entity;
+				if (((previousValue != value) 
+							|| (this._Stagiaire.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Stagiaire.Entity = null;
+						previousValue.presenceHistories.Remove(this);
+					}
+					this._Stagiaire.Entity = value;
+					if ((value != null))
+					{
+						value.presenceHistories.Add(this);
+						this._cef = value.CEF;
+					}
+					else
+					{
+						this._cef = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("Stagiaire");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Stagiaire")]
 	public partial class Stagiaire : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -253,6 +732,10 @@ namespace FaceReco
 		private string _adresse;
 		
 		private System.Nullable<int> _idG;
+		
+		private EntityRef<stagiaireEncod> _stagiaireEncod;
+		
+		private EntitySet<presenceHistory> _presenceHistories;
 		
 		private EntityRef<Groupe> _Groupe;
 		
@@ -278,6 +761,8 @@ namespace FaceReco
 		
 		public Stagiaire()
 		{
+			this._stagiaireEncod = default(EntityRef<stagiaireEncod>);
+			this._presenceHistories = new EntitySet<presenceHistory>(new Action<presenceHistory>(this.attach_presenceHistories), new Action<presenceHistory>(this.detach_presenceHistories));
 			this._Groupe = default(EntityRef<Groupe>);
 			OnCreated();
 		}
@@ -426,7 +911,49 @@ namespace FaceReco
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Groupe_Stagiaire", Storage="_Groupe", ThisKey="idG", OtherKey="idG", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stagiaire_stagiaireEncod", Storage="_stagiaireEncod", ThisKey="CEF", OtherKey="cef", IsUnique=true, IsForeignKey=false)]
+		public stagiaireEncod stagiaireEncod
+		{
+			get
+			{
+				return this._stagiaireEncod.Entity;
+			}
+			set
+			{
+				stagiaireEncod previousValue = this._stagiaireEncod.Entity;
+				if (((previousValue != value) 
+							|| (this._stagiaireEncod.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._stagiaireEncod.Entity = null;
+						previousValue.Stagiaire = null;
+					}
+					this._stagiaireEncod.Entity = value;
+					if ((value != null))
+					{
+						value.Stagiaire = this;
+					}
+					this.SendPropertyChanged("stagiaireEncod");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stagiaire_presenceHistory", Storage="_presenceHistories", ThisKey="CEF", OtherKey="cef")]
+		public EntitySet<presenceHistory> presenceHistories
+		{
+			get
+			{
+				return this._presenceHistories;
+			}
+			set
+			{
+				this._presenceHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Groupe_Stagiaire", Storage="_Groupe", ThisKey="idG", OtherKey="idG", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Groupe Groupe
 		{
 			get
@@ -479,184 +1006,17 @@ namespace FaceReco
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Groupe")]
-	public partial class Groupe : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idG;
-		
-		private int _numG;
-		
-		private System.Nullable<int> _idF;
-		
-		private EntitySet<Stagiaire> _Stagiaires;
-		
-		private EntityRef<Filier> _Filier;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidGChanging(int value);
-    partial void OnidGChanged();
-    partial void OnnumGChanging(int value);
-    partial void OnnumGChanged();
-    partial void OnidFChanging(System.Nullable<int> value);
-    partial void OnidFChanged();
-    #endregion
-		
-		public Groupe()
-		{
-			this._Stagiaires = new EntitySet<Stagiaire>(new Action<Stagiaire>(this.attach_Stagiaires), new Action<Stagiaire>(this.detach_Stagiaires));
-			this._Filier = default(EntityRef<Filier>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idG", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idG
-		{
-			get
-			{
-				return this._idG;
-			}
-			set
-			{
-				if ((this._idG != value))
-				{
-					this.OnidGChanging(value);
-					this.SendPropertyChanging();
-					this._idG = value;
-					this.SendPropertyChanged("idG");
-					this.OnidGChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numG", DbType="Int NOT NULL")]
-		public int numG
-		{
-			get
-			{
-				return this._numG;
-			}
-			set
-			{
-				if ((this._numG != value))
-				{
-					this.OnnumGChanging(value);
-					this.SendPropertyChanging();
-					this._numG = value;
-					this.SendPropertyChanged("numG");
-					this.OnnumGChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idF", DbType="Int")]
-		public System.Nullable<int> idF
-		{
-			get
-			{
-				return this._idF;
-			}
-			set
-			{
-				if ((this._idF != value))
-				{
-					if (this._Filier.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidFChanging(value);
-					this.SendPropertyChanging();
-					this._idF = value;
-					this.SendPropertyChanged("idF");
-					this.OnidFChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Groupe_Stagiaire", Storage="_Stagiaires", ThisKey="idG", OtherKey="idG")]
-		public EntitySet<Stagiaire> Stagiaires
-		{
-			get
-			{
-				return this._Stagiaires;
-			}
-			set
-			{
-				this._Stagiaires.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Filier_Groupe", Storage="_Filier", ThisKey="idF", OtherKey="idF", IsForeignKey=true)]
-		public Filier Filier
-		{
-			get
-			{
-				return this._Filier.Entity;
-			}
-			set
-			{
-				Filier previousValue = this._Filier.Entity;
-				if (((previousValue != value) 
-							|| (this._Filier.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Filier.Entity = null;
-						previousValue.Groupes.Remove(this);
-					}
-					this._Filier.Entity = value;
-					if ((value != null))
-					{
-						value.Groupes.Add(this);
-						this._idF = value.idF;
-					}
-					else
-					{
-						this._idF = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Filier");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Stagiaires(Stagiaire entity)
+		private void attach_presenceHistories(presenceHistory entity)
 		{
 			this.SendPropertyChanging();
-			entity.Groupe = this;
+			entity.Stagiaire = this;
 		}
 		
-		private void detach_Stagiaires(Stagiaire entity)
+		private void detach_presenceHistories(presenceHistory entity)
 		{
 			this.SendPropertyChanging();
-			entity.Groupe = null;
+			entity.Stagiaire = null;
 		}
 	}
 }

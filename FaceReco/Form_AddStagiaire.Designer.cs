@@ -47,13 +47,20 @@ namespace FaceReco
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.pb_live = new System.Windows.Forms.PictureBox();
+            this.btn_capture = new System.Windows.Forms.Button();
+            this.btn_Import = new System.Windows.Forms.Button();
+            this.pb_face = new System.Windows.Forms.PictureBox();
+            this.btn_pause = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_live)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_face)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_Fil
             // 
             this.cb_Fil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_Fil.FormattingEnabled = true;
-            this.cb_Fil.Location = new System.Drawing.Point(171, 30);
+            this.cb_Fil.Location = new System.Drawing.Point(100, 46);
             this.cb_Fil.Name = "cb_Fil";
             this.cb_Fil.Size = new System.Drawing.Size(121, 21);
             this.cb_Fil.TabIndex = 0;
@@ -63,7 +70,7 @@ namespace FaceReco
             // 
             this.cb_Grp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_Grp.FormattingEnabled = true;
-            this.cb_Grp.Location = new System.Drawing.Point(171, 57);
+            this.cb_Grp.Location = new System.Drawing.Point(100, 73);
             this.cb_Grp.Name = "cb_Grp";
             this.cb_Grp.Size = new System.Drawing.Size(121, 21);
             this.cb_Grp.TabIndex = 1;
@@ -71,7 +78,7 @@ namespace FaceReco
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(100, 33);
+            this.label1.Location = new System.Drawing.Point(29, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 2;
@@ -79,14 +86,14 @@ namespace FaceReco
             // 
             // txt_CEF
             // 
-            this.txt_CEF.Location = new System.Drawing.Point(171, 84);
+            this.txt_CEF.Location = new System.Drawing.Point(100, 100);
             this.txt_CEF.Name = "txt_CEF";
             this.txt_CEF.Size = new System.Drawing.Size(121, 20);
             this.txt_CEF.TabIndex = 2;
             // 
             // btn_Exit
             // 
-            this.btn_Exit.Location = new System.Drawing.Point(160, 264);
+            this.btn_Exit.Location = new System.Drawing.Point(280, 451);
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.Size = new System.Drawing.Size(89, 45);
             this.btn_Exit.TabIndex = 9;
@@ -96,7 +103,7 @@ namespace FaceReco
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(317, 264);
+            this.btn_Save.Location = new System.Drawing.Point(437, 451);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(89, 45);
             this.btn_Save.TabIndex = 8;
@@ -106,43 +113,44 @@ namespace FaceReco
             // 
             // txt_Cin
             // 
-            this.txt_Cin.Location = new System.Drawing.Point(171, 110);
+            this.txt_Cin.Location = new System.Drawing.Point(100, 126);
             this.txt_Cin.Name = "txt_Cin";
             this.txt_Cin.Size = new System.Drawing.Size(121, 20);
             this.txt_Cin.TabIndex = 3;
             // 
             // txt_Nom
             // 
-            this.txt_Nom.Location = new System.Drawing.Point(171, 136);
+            this.txt_Nom.Location = new System.Drawing.Point(100, 152);
             this.txt_Nom.Name = "txt_Nom";
             this.txt_Nom.Size = new System.Drawing.Size(197, 20);
             this.txt_Nom.TabIndex = 4;
             // 
             // txt_Prenom
             // 
-            this.txt_Prenom.Location = new System.Drawing.Point(171, 162);
+            this.txt_Prenom.Location = new System.Drawing.Point(100, 178);
             this.txt_Prenom.Name = "txt_Prenom";
             this.txt_Prenom.Size = new System.Drawing.Size(197, 20);
             this.txt_Prenom.TabIndex = 5;
             // 
             // txt_ville
             // 
-            this.txt_ville.Location = new System.Drawing.Point(171, 188);
+            this.txt_ville.Location = new System.Drawing.Point(100, 204);
             this.txt_ville.Name = "txt_ville";
             this.txt_ville.Size = new System.Drawing.Size(121, 20);
             this.txt_ville.TabIndex = 6;
             // 
             // txt_addresse
             // 
-            this.txt_addresse.Location = new System.Drawing.Point(171, 214);
+            this.txt_addresse.Location = new System.Drawing.Point(100, 230);
+            this.txt_addresse.Multiline = true;
             this.txt_addresse.Name = "txt_addresse";
-            this.txt_addresse.Size = new System.Drawing.Size(284, 20);
+            this.txt_addresse.Size = new System.Drawing.Size(284, 44);
             this.txt_addresse.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 90);
+            this.label2.Location = new System.Drawing.Point(36, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 13;
@@ -151,7 +159,7 @@ namespace FaceReco
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(112, 116);
+            this.label3.Location = new System.Drawing.Point(41, 132);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 14;
@@ -160,7 +168,7 @@ namespace FaceReco
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(105, 142);
+            this.label4.Location = new System.Drawing.Point(34, 158);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 15;
@@ -169,7 +177,7 @@ namespace FaceReco
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(91, 168);
+            this.label5.Location = new System.Drawing.Point(20, 184);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 16;
@@ -178,7 +186,7 @@ namespace FaceReco
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(108, 194);
+            this.label6.Location = new System.Drawing.Point(37, 210);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 17;
@@ -187,7 +195,7 @@ namespace FaceReco
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(89, 219);
+            this.label7.Location = new System.Drawing.Point(18, 235);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 13);
             this.label7.TabIndex = 18;
@@ -196,18 +204,72 @@ namespace FaceReco
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(92, 63);
+            this.label8.Location = new System.Drawing.Point(21, 79);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 13);
             this.label8.TabIndex = 19;
             this.label8.Text = "Groupe :";
             // 
+            // pb_live
+            // 
+            this.pb_live.BackColor = System.Drawing.Color.Gainsboro;
+            this.pb_live.Location = new System.Drawing.Point(429, 12);
+            this.pb_live.Name = "pb_live";
+            this.pb_live.Size = new System.Drawing.Size(362, 337);
+            this.pb_live.TabIndex = 20;
+            this.pb_live.TabStop = false;
+            // 
+            // btn_capture
+            // 
+            this.btn_capture.Location = new System.Drawing.Point(437, 355);
+            this.btn_capture.Name = "btn_capture";
+            this.btn_capture.Size = new System.Drawing.Size(75, 45);
+            this.btn_capture.TabIndex = 21;
+            this.btn_capture.Text = "Capturer une image ";
+            this.btn_capture.UseVisualStyleBackColor = true;
+            this.btn_capture.Click += new System.EventHandler(this.btn_capture_Click);
+            // 
+            // btn_Import
+            // 
+            this.btn_Import.Location = new System.Drawing.Point(539, 355);
+            this.btn_Import.Name = "btn_Import";
+            this.btn_Import.Size = new System.Drawing.Size(75, 45);
+            this.btn_Import.TabIndex = 22;
+            this.btn_Import.Text = "Importer une image ";
+            this.btn_Import.UseVisualStyleBackColor = true;
+            this.btn_Import.Click += new System.EventHandler(this.btn_Import_Click);
+            // 
+            // pb_face
+            // 
+            this.pb_face.BackColor = System.Drawing.Color.Gainsboro;
+            this.pb_face.Location = new System.Drawing.Point(664, 355);
+            this.pb_face.Name = "pb_face";
+            this.pb_face.Size = new System.Drawing.Size(127, 105);
+            this.pb_face.TabIndex = 23;
+            this.pb_face.TabStop = false;
+            // 
+            // btn_pause
+            // 
+            this.btn_pause.Enabled = false;
+            this.btn_pause.Location = new System.Drawing.Point(437, 406);
+            this.btn_pause.Name = "btn_pause";
+            this.btn_pause.Size = new System.Drawing.Size(75, 23);
+            this.btn_pause.TabIndex = 24;
+            this.btn_pause.Text = "Pause Live";
+            this.btn_pause.UseVisualStyleBackColor = true;
+            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
+            // 
             // Form_AddStagiaire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 338);
+            this.ClientSize = new System.Drawing.Size(803, 529);
             this.ControlBox = false;
+            this.Controls.Add(this.btn_pause);
+            this.Controls.Add(this.pb_face);
+            this.Controls.Add(this.btn_Import);
+            this.Controls.Add(this.btn_capture);
+            this.Controls.Add(this.pb_live);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -231,6 +293,8 @@ namespace FaceReco
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_AddStagiaire";
             this.Load += new System.EventHandler(this.Form_AddStagiaire_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_live)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_face)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,5 +320,10 @@ namespace FaceReco
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pb_live;
+        private System.Windows.Forms.Button btn_capture;
+        private System.Windows.Forms.Button btn_Import;
+        private System.Windows.Forms.PictureBox pb_face;
+        private System.Windows.Forms.Button btn_pause;
     }
 }

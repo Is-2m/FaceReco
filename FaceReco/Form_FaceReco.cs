@@ -30,9 +30,8 @@ namespace FaceReco
     {
         Graphics graph;
 
-        FaceRecognition fr;
-        string dir = Path.Combine(Environment.CurrentDirectory, "models");
-        List<FaceEncoding> lstEncods;
+        FaceRecognition fr = Program.fr;
+        List<FaceEncoding> lstEncods = Program.lstEncods;
         private VideoCapture videoCapture;
         List<String> lstImgs;
         readonly CascadeClassifier cascadeClassifier = new CascadeClassifier(Path.Combine(Environment.CurrentDirectory, @"haarcascade_frontalface_alt_tree.xml"));
@@ -43,9 +42,7 @@ namespace FaceReco
 
         private void Form_FaceReco_Load(object sender, EventArgs e)
         {
-            FaceRecognition.InternalEncoding = Encoding.GetEncoding("shift_jis");
-            fr = FaceRecognition.Create(dir);
-            loadImages();
+            //loadImages();
             if (videoCapture == null)
             {
                 videoCapture = new VideoCapture(0);
@@ -57,10 +54,9 @@ namespace FaceReco
         {
             videoCapture.ImageGrabbed += VideoCapture_ImageGrabbed;
             videoCapture.Start();
-        }
+        }   
         private void VideoCapture_ImageGrabbed(object sender, EventArgs e)
         {
-
             try
             {
                 Mat m = new Mat();
@@ -100,8 +96,6 @@ namespace FaceReco
         private async Task newMeth(Bitmap bp)
         {
 
-            int indexMatch = -1;
-
             var img = FaceRecognition.LoadImage(bp);
             var loc = fr.FaceLocations(img);
             if (loc.Count() != 0)
@@ -124,6 +118,14 @@ namespace FaceReco
                         {
                             //graph.DrawString(Path.GetFileName(lstImgs[i]), new Font("Tahoma", 20), Brushes.Black, new System.Drawing.Point(loc.ElementAt(j).Left * 4 + 2, loc.ElementAt(j).Top * 4 - 35));
                             isFound = true;
+                            //var entity = new presenceHistory();
+                            //var s =String.Join(",", lstEncods[i].GetRawEncoding());
+                            //var encod = Program.dc.stagiaireEncods.First(obj => obj.stringEncod == s);
+                            //entity.cef = encod.cef;
+                            //entity.Stagiaire = encod.Stagiaire;
+                            //entity.dateHistory = DateTime.Now;
+                            //Program.dc.presenceHistories.InsertOnSubmit(entity);
+                            //Program.dc.SubmitChanges();
                             break;
                         }
 
@@ -139,20 +141,20 @@ namespace FaceReco
 
                 //FaceRe(bp);
             }
+            else
+            {
+                SwitchMode(0);
+            }
         }
 
         private void FaceRe(Bitmap bp)
         {
-            FaceRecognition.InternalEncoding = Encoding.GetEncoding("shift_jis");
-            FaceRecognition fr1 = FaceRecognition.Create(dir);
-
-
             var img = FaceRecognition.LoadImage(bp);
             //bp.Dispose();
             try
             {
-                var locationsA = fr1.FaceLocations(img);
-                IEnumerable<FaceEncoding> encodingA = fr1.FaceEncodings(img, locationsA);
+                var locationsA = fr.FaceLocations(img);
+                IEnumerable<FaceEncoding> encodingA = fr.FaceEncodings(img, locationsA);
                 const double tolerance = 0.5d;
 
                 int indexMatch = -1;
@@ -183,43 +185,47 @@ namespace FaceReco
             }
             else
             {
-                this.pan_red.Visible = !b;
-                this.pan_green.Visible = b;
+                
+                    this.pan_red.Visible = !b;
+                    this.pan_green.Visible = b;
+
             }
         }
-
-        private void loadImages()
+        private void SwitchMode(int a)
         {
-            lstImgs = new List<String>();
-            lstEncods = new List<FaceEncoding>();
-
-            string mainPath = Path.Combine(Environment.CurrentDirectory, @"Images\");
-            var imgsPath = Directory.GetFiles(mainPath);
-
-            foreach (var i in imgsPath)
+            if (this.pan_green.InvokeRequired)
             {
-                lstImgs.Add(i);
-                lstEncods.Add(fr.FaceEncodings(FaceRecognition.LoadImageFile(i)).First());
+                SetTextCallback d = new SetTextCallback(SwitchMode);
+                this.Invoke(d, new object[] { a });
             }
+            else
+            {
+                this.pan_red.Visible = true;
+                this.pan_green.Visible = true;
 
-        }
-
-        private void btn_Serialize_Click(object sender, EventArgs e)
-        {
-            var kda = lstEncods[0].GetRawEncoding();
-            //foreach (var item in kda)
-            //{
-            //    textBox2.Text += item.ToString() + "\n";
-            //}
-            var jsonSer = new JsonSerializer();
-            var stream = new StreamWriter(Path.Combine(Environment.CurrentDirectory, @"encods.bin"));
-            JsonWriter writer = new JsonTextWriter(stream);
-            jsonSer.Serialize(writer, JsonConvert.SerializeObject(kda));
+            }
         }
 
         private void btn_stop_Click(object sender, EventArgs e)
         {
             videoCapture.Dispose();
+            pb_live.Image = null;
+
+            pan_red.Visible = true;
+            pan_green.Visible = true;
+        }
+
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            if (btn_pause.Text == "&Pause")
+            {
+                videoCapture.Pause();
+                btn_pause.Text = "&Start";
+            }
+            else
+            {
+                videoCapture.Start();
+            }
         }
     }
 }

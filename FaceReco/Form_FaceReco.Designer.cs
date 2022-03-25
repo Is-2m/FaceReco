@@ -33,6 +33,8 @@ namespace FaceReco
             this.pb_live = new System.Windows.Forms.PictureBox();
             this.pan_green = new System.Windows.Forms.Panel();
             this.pan_red = new System.Windows.Forms.Panel();
+            this.btn_pause = new System.Windows.Forms.Button();
+            this.btn_stop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_live)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,11 +75,33 @@ namespace FaceReco
             this.pan_red.TabIndex = 3;
             this.pan_red.Visible = false;
             // 
+            // btn_pause
+            // 
+            this.btn_pause.Location = new System.Drawing.Point(540, 68);
+            this.btn_pause.Name = "btn_pause";
+            this.btn_pause.Size = new System.Drawing.Size(75, 23);
+            this.btn_pause.TabIndex = 4;
+            this.btn_pause.Text = "&Pause";
+            this.btn_pause.UseVisualStyleBackColor = true;
+            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
+            // 
+            // btn_stop
+            // 
+            this.btn_stop.Location = new System.Drawing.Point(540, 97);
+            this.btn_stop.Name = "btn_stop";
+            this.btn_stop.Size = new System.Drawing.Size(75, 23);
+            this.btn_stop.TabIndex = 5;
+            this.btn_stop.Text = "&Stop";
+            this.btn_stop.UseVisualStyleBackColor = true;
+            this.btn_stop.Click += new System.EventHandler(this.btn_stop_Click);
+            // 
             // Form_FaceReco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 498);
+            this.Controls.Add(this.btn_stop);
+            this.Controls.Add(this.btn_pause);
             this.Controls.Add(this.pan_red);
             this.Controls.Add(this.pan_green);
             this.Controls.Add(this.pb_live);
@@ -98,5 +122,7 @@ namespace FaceReco
         private System.Windows.Forms.PictureBox pb_live;
         private System.Windows.Forms.Panel pan_green;
         private System.Windows.Forms.Panel pan_red;
+        private System.Windows.Forms.Button btn_pause;
+        private System.Windows.Forms.Button btn_stop;
     }
 }
