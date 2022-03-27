@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FaceRec" Class="FaceRecDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLExpress;Initial Catalog=FaceRec;Integrated Security=True" SettingsObjectName="FaceReco.Properties.Settings" SettingsPropertyName="FaceRecConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.stagiaireEncod" Member="stagiaireEncods">
+    <Type Name="stagiaireEncod">
+      <Column Name="cef" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="stringEncod" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Stagiaire_stagiaireEncod" Member="Stagiaire" ThisKey="cef" OtherKey="CEF" Type="Stagiaire" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Filier" Member="Filiers">
     <Type Name="Filier">
       <Column Name="idF" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="nomF" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="intitule" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="Filier_Groupe" Member="Groupes" ThisKey="idF" OtherKey="idF" Type="Groupe" />
-    </Type>
-  </Table>
-  <Table Name="dbo.stagiaireEncod" Member="stagiaireEncods">
-    <Type Name="stagiaireEncod">
-      <Column Name="cef" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="stringEncod" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Stagiaire_stagiaireEncod" Member="Stagiaire" ThisKey="cef" OtherKey="CEF" Type="Stagiaire" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Groupe" Member="Groupes">

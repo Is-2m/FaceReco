@@ -36,6 +36,7 @@ namespace FaceReco
             this.btn_pause = new System.Windows.Forms.Button();
             this.btn_stop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_live)).BeginInit();
+            this.pan_green.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Detect
@@ -60,6 +61,7 @@ namespace FaceReco
             // pan_green
             // 
             this.pan_green.BackColor = System.Drawing.Color.LimeGreen;
+            this.pan_green.Controls.Add(this.pan_red);
             this.pan_green.Location = new System.Drawing.Point(554, 354);
             this.pan_green.Name = "pan_green";
             this.pan_green.Size = new System.Drawing.Size(138, 132);
@@ -69,7 +71,7 @@ namespace FaceReco
             // pan_red
             // 
             this.pan_red.BackColor = System.Drawing.Color.Firebrick;
-            this.pan_red.Location = new System.Drawing.Point(698, 354);
+            this.pan_red.Location = new System.Drawing.Point(0, 0);
             this.pan_red.Name = "pan_red";
             this.pan_red.Size = new System.Drawing.Size(138, 132);
             this.pan_red.TabIndex = 3;
@@ -102,7 +104,6 @@ namespace FaceReco
             this.ClientSize = new System.Drawing.Size(846, 498);
             this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.btn_pause);
-            this.Controls.Add(this.pan_red);
             this.Controls.Add(this.pan_green);
             this.Controls.Add(this.pb_live);
             this.Controls.Add(this.btn_Detect);
@@ -112,6 +113,7 @@ namespace FaceReco
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FaceReco_FormClosing);
             this.Load += new System.EventHandler(this.Form_FaceReco_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_live)).EndInit();
+            this.pan_green.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -75,6 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FaceData.cs" />
+    <Compile Include="FaceRec.cs">
+      <DependentUpon>FaceRec.dbml</DependentUpon>
+    </Compile>
     <Compile Include="FaceRec.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

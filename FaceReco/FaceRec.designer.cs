@@ -30,12 +30,12 @@ namespace FaceReco
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertFilier(Filier instance);
-    partial void UpdateFilier(Filier instance);
-    partial void DeleteFilier(Filier instance);
     partial void InsertstagiaireEncod(stagiaireEncod instance);
     partial void UpdatestagiaireEncod(stagiaireEncod instance);
     partial void DeletestagiaireEncod(stagiaireEncod instance);
+    partial void InsertFilier(Filier instance);
+    partial void UpdateFilier(Filier instance);
+    partial void DeleteFilier(Filier instance);
     partial void InsertGroupe(Groupe instance);
     partial void UpdateGroupe(Groupe instance);
     partial void DeleteGroupe(Groupe instance);
@@ -77,19 +77,19 @@ namespace FaceReco
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Filier> Filiers
-		{
-			get
-			{
-				return this.GetTable<Filier>();
-			}
-		}
-		
 		public System.Data.Linq.Table<stagiaireEncod> stagiaireEncods
 		{
 			get
 			{
 				return this.GetTable<stagiaireEncod>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Filier> Filiers
+		{
+			get
+			{
+				return this.GetTable<Filier>();
 			}
 		}
 		
@@ -114,6 +114,133 @@ namespace FaceReco
 			get
 			{
 				return this.GetTable<Stagiaire>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.stagiaireEncod")]
+	public partial class stagiaireEncod : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _cef;
+		
+		private string _stringEncod;
+		
+		private EntityRef<Stagiaire> _Stagiaire;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncefChanging(long value);
+    partial void OncefChanged();
+    partial void OnstringEncodChanging(string value);
+    partial void OnstringEncodChanged();
+    #endregion
+		
+		public stagiaireEncod()
+		{
+			this._Stagiaire = default(EntityRef<Stagiaire>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cef", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long cef
+		{
+			get
+			{
+				return this._cef;
+			}
+			set
+			{
+				if ((this._cef != value))
+				{
+					if (this._Stagiaire.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncefChanging(value);
+					this.SendPropertyChanging();
+					this._cef = value;
+					this.SendPropertyChanged("cef");
+					this.OncefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stringEncod", DbType="VarChar(MAX)")]
+		public string stringEncod
+		{
+			get
+			{
+				return this._stringEncod;
+			}
+			set
+			{
+				if ((this._stringEncod != value))
+				{
+					this.OnstringEncodChanging(value);
+					this.SendPropertyChanging();
+					this._stringEncod = value;
+					this.SendPropertyChanged("stringEncod");
+					this.OnstringEncodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stagiaire_stagiaireEncod", Storage="_Stagiaire", ThisKey="cef", OtherKey="CEF", IsForeignKey=true)]
+		public Stagiaire Stagiaire
+		{
+			get
+			{
+				return this._Stagiaire.Entity;
+			}
+			set
+			{
+				Stagiaire previousValue = this._Stagiaire.Entity;
+				if (((previousValue != value) 
+							|| (this._Stagiaire.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Stagiaire.Entity = null;
+						previousValue.stagiaireEncod = null;
+					}
+					this._Stagiaire.Entity = value;
+					if ((value != null))
+					{
+						value.stagiaireEncod = this;
+						this._cef = value.CEF;
+					}
+					else
+					{
+						this._cef = default(long);
+					}
+					this.SendPropertyChanged("Stagiaire");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -253,133 +380,6 @@ namespace FaceReco
 		{
 			this.SendPropertyChanging();
 			entity.Filier = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.stagiaireEncod")]
-	public partial class stagiaireEncod : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _cef;
-		
-		private string _stringEncod;
-		
-		private EntityRef<Stagiaire> _Stagiaire;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OncefChanging(long value);
-    partial void OncefChanged();
-    partial void OnstringEncodChanging(string value);
-    partial void OnstringEncodChanged();
-    #endregion
-		
-		public stagiaireEncod()
-		{
-			this._Stagiaire = default(EntityRef<Stagiaire>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cef", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long cef
-		{
-			get
-			{
-				return this._cef;
-			}
-			set
-			{
-				if ((this._cef != value))
-				{
-					if (this._Stagiaire.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OncefChanging(value);
-					this.SendPropertyChanging();
-					this._cef = value;
-					this.SendPropertyChanged("cef");
-					this.OncefChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stringEncod", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string stringEncod
-		{
-			get
-			{
-				return this._stringEncod;
-			}
-			set
-			{
-				if ((this._stringEncod != value))
-				{
-					this.OnstringEncodChanging(value);
-					this.SendPropertyChanging();
-					this._stringEncod = value;
-					this.SendPropertyChanged("stringEncod");
-					this.OnstringEncodChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stagiaire_stagiaireEncod", Storage="_Stagiaire", ThisKey="cef", OtherKey="CEF", IsForeignKey=true)]
-		public Stagiaire Stagiaire
-		{
-			get
-			{
-				return this._Stagiaire.Entity;
-			}
-			set
-			{
-				Stagiaire previousValue = this._Stagiaire.Entity;
-				if (((previousValue != value) 
-							|| (this._Stagiaire.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Stagiaire.Entity = null;
-						previousValue.stagiaireEncod = null;
-					}
-					this._Stagiaire.Entity = value;
-					if ((value != null))
-					{
-						value.stagiaireEncod = this;
-						this._cef = value.CEF;
-					}
-					else
-					{
-						this._cef = default(long);
-					}
-					this.SendPropertyChanged("Stagiaire");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	

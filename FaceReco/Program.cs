@@ -30,7 +30,7 @@ namespace FaceReco
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main_Form());
         }
-        static void loadEncodings()
+        public static void loadEncodings()
         {
             if (dc.stagiaireEncods.Count() != 0)
             {

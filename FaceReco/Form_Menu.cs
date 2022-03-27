@@ -90,6 +90,8 @@ namespace FaceReco
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
             var f = new Form_FaceReco();
             f.MdiParent = this;
             f.Dock = DockStyle.Fill;

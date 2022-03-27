@@ -45,7 +45,7 @@ namespace FaceReco
                     Create();
                 else
                     Modify();
-
+                Program.loadEncodings();
             }
             catch (Exception ex)
             {
