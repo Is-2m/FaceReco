@@ -35,6 +35,7 @@ namespace FaceReco
             this.pan_red = new System.Windows.Forms.Panel();
             this.btn_pause = new System.Windows.Forms.Button();
             this.btn_stop = new System.Windows.Forms.Button();
+            this.btn_Exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_live)).BeginInit();
             this.pan_green.SuspendLayout();
             this.SuspendLayout();
@@ -97,11 +98,22 @@ namespace FaceReco
             this.btn_stop.UseVisualStyleBackColor = true;
             this.btn_stop.Click += new System.EventHandler(this.btn_stop_Click);
             // 
+            // btn_Exit
+            // 
+            this.btn_Exit.Location = new System.Drawing.Point(759, 12);
+            this.btn_Exit.Name = "btn_Exit";
+            this.btn_Exit.Size = new System.Drawing.Size(75, 23);
+            this.btn_Exit.TabIndex = 6;
+            this.btn_Exit.Text = "&Exit";
+            this.btn_Exit.UseVisualStyleBackColor = true;
+            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
+            // 
             // Form_FaceReco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 498);
+            this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.btn_pause);
             this.Controls.Add(this.pan_green);
@@ -126,5 +138,6 @@ namespace FaceReco
         private System.Windows.Forms.Panel pan_red;
         private System.Windows.Forms.Button btn_pause;
         private System.Windows.Forms.Button btn_stop;
+        private System.Windows.Forms.Button btn_Exit;
     }
 }

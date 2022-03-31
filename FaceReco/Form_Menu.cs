@@ -97,5 +97,9 @@ namespace FaceReco
             f.Dock = DockStyle.Fill;
             f.Show();
         }
+
+        private void Main_Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+        }
     }
 }

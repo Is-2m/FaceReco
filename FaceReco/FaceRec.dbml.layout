@@ -2,62 +2,62 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 8.5" name="FaceRec">
   <DataContextMoniker Name="/FaceRecDataContext" />
   <nestedChildShapes>
-    <classShape Id="7607b569-9763-438d-bb56-dbcd49f7f17d" absoluteBounds="9, 1, 2, 1.1939925130208338">
-      <DataClassMoniker Name="/FaceRecDataContext/stagiaireEncod" />
-      <nestedChildShapes>
-        <elementListCompartment Id="2fe774cf-0ab4-48f9-a4e7-b8864da7ad77" absoluteBounds="9.015, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="99795bba-f8c4-4175-a239-ebe98d58a203" absoluteBounds="0.75, 2, 2, 1.3862939453124998">
+    <classShape Id="910922bf-541a-4ff3-917a-596c6c77ff46" absoluteBounds="0.75, 2, 2, 1.3862939453124998">
       <DataClassMoniker Name="/FaceRecDataContext/Filier" />
       <nestedChildShapes>
-        <elementListCompartment Id="bb6ce038-394d-44ef-b1e4-2979e2f1e5e2" absoluteBounds="0.765, 2.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a30fcabe-5c99-4f85-a272-c74affad6800" absoluteBounds="0.765, 2.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="473291a4-3716-404b-b501-0c75ff025c75" absoluteBounds="3.5, 2, 2, 1.3862939453125003">
+    <classShape Id="2bfada7f-ad26-4cbb-b428-8d3e3d6efd3a" absoluteBounds="9, 1, 2, 1.1939925130208338">
+      <DataClassMoniker Name="/FaceRecDataContext/stagiaireEncod" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9dd2139c-42f0-48db-9ae9-428e5e7dcc92" absoluteBounds="9.015, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b136509d-563c-4e93-92bb-7fbf08488d24" absoluteBounds="3.5, 2, 2, 1.3862939453125003">
       <DataClassMoniker Name="/FaceRecDataContext/Groupe" />
       <nestedChildShapes>
-        <elementListCompartment Id="56160f22-a65a-4608-823e-93e125686a20" absoluteBounds="3.515, 2.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1ec54fe4-f9d1-4abe-bca8-68e2f2050abc" absoluteBounds="3.515, 2.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="76fda962-f7c6-4a23-8872-25c7d5565896" absoluteBounds="9, 2.875, 2, 1.3862939453125005">
+    <classShape Id="939c0e0d-46cc-4d94-9415-32136d6b6cf8" absoluteBounds="9, 2.875, 2, 1.3862939453125005">
       <DataClassMoniker Name="/FaceRecDataContext/presenceHistory" />
       <nestedChildShapes>
-        <elementListCompartment Id="7216c260-a2f5-4117-9604-6a1d4c30de33" absoluteBounds="9.015, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7504ba81-36c1-4bb4-96a7-35472383a58f" absoluteBounds="9.015, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="537241dc-dde1-4e6f-8c13-0890f078a6d3" absoluteBounds="6.25, 1.625, 2, 2.1554996744791666">
+    <classShape Id="cb5e8de3-a8f9-4b8c-afbc-5889dbcb6241" absoluteBounds="6.25, 1.625, 2, 2.1554996744791666">
       <DataClassMoniker Name="/FaceRecDataContext/Stagiaire" />
       <nestedChildShapes>
-        <elementListCompartment Id="4420cca8-d6de-4bdd-a76b-199b0d170eaa" absoluteBounds="6.265, 2.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="cb88cca7-7fe4-42d2-9c6b-cc67fc06ea92" absoluteBounds="6.265, 2.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(2.75 : 2.69314697265625); (3.5 : 2.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/FaceRecDataContext/Filier/Filier_Groupe" />
       <nodes>
-        <classShapeMoniker Id="99795bba-f8c4-4175-a239-ebe98d58a203" />
-        <classShapeMoniker Id="473291a4-3716-404b-b501-0c75ff025c75" />
+        <classShapeMoniker Id="910922bf-541a-4ff3-917a-596c6c77ff46" />
+        <classShapeMoniker Id="b136509d-563c-4e93-92bb-7fbf08488d24" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 1.90949625651042); (9 : 1.90949625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/FaceRecDataContext/Stagiaire/Stagiaire_stagiaireEncod" />
       <nodes>
-        <classShapeMoniker Id="537241dc-dde1-4e6f-8c13-0890f078a6d3" />
-        <classShapeMoniker Id="7607b569-9763-438d-bb56-dbcd49f7f17d" />
+        <classShapeMoniker Id="cb5e8de3-a8f9-4b8c-afbc-5889dbcb6241" />
+        <classShapeMoniker Id="2bfada7f-ad26-4cbb-b428-8d3e3d6efd3a" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 3.32774983723958); (9 : 3.32774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/FaceRecDataContext/Stagiaire/Stagiaire_presenceHistory" />
       <nodes>
-        <classShapeMoniker Id="537241dc-dde1-4e6f-8c13-0890f078a6d3" />
-        <classShapeMoniker Id="76fda962-f7c6-4a23-8872-25c7d5565896" />
+        <classShapeMoniker Id="cb5e8de3-a8f9-4b8c-afbc-5889dbcb6241" />
+        <classShapeMoniker Id="939c0e0d-46cc-4d94-9415-32136d6b6cf8" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 2.69314697265625); (6.25 : 2.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/FaceRecDataContext/Groupe/Groupe_Stagiaire" />
       <nodes>
-        <classShapeMoniker Id="473291a4-3716-404b-b501-0c75ff025c75" />
-        <classShapeMoniker Id="537241dc-dde1-4e6f-8c13-0890f078a6d3" />
+        <classShapeMoniker Id="b136509d-563c-4e93-92bb-7fbf08488d24" />
+        <classShapeMoniker Id="cb5e8de3-a8f9-4b8c-afbc-5889dbcb6241" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
