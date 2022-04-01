@@ -34,7 +34,7 @@ namespace FaceReco
             dgv_stgr.Rows.Clear();
             foreach (var s in Program.dc.Stagiaires)
             {
-                dgv_stgr.Rows.Add(s.CEF, s.cin, s.nom, s.prenom, s.Groupe.Filier.nomF, s.Groupe.numG, s.ville, s.adresse);
+                dgv_stgr.Rows.Add(s.CEF, s.cin, s.nom, s.prenom, s.Groupe == null ? "null" : s.Groupe.Filier.nomF, s.Groupe == null ? "null" : s.Groupe.numG.ToString(), s.ville, s.adresse);
             }
         }
         private void btn_Close_Click(object sender, EventArgs e)
@@ -47,10 +47,10 @@ namespace FaceReco
             int pos = dgv_stgr.CurrentCell.RowIndex;
             long cef = long.Parse(dgv_stgr.Rows[pos].Cells[0].Value.ToString());
             DialogResult r = MessageBox.Show("Voulez-vous supprimer cette sauvegarde?", "Suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(DialogResult.Yes == r)
+            if (DialogResult.Yes == r)
             {
                 var stgr = Program.dc.Stagiaires.First(obj => obj.CEF == cef);
-                Program.dc.Stagiaires.DeleteOnSubmit(stgr);
+                Program.dc.Stagiaires.Remove(stgr);
                 dgv_stgr.Rows.RemoveAt(pos);
                 //Program.dc.SubmitChanges();
             }
@@ -59,7 +59,7 @@ namespace FaceReco
         private void btn_Save_Exite_Click(object sender, EventArgs e)
         {
 
-            Program.dc.SubmitChanges();
+            Program.dc.SaveChanges();
             this.Close();
         }
 

@@ -11,7 +11,7 @@ namespace FaceReco
 {
     static class Program
     {
-        public static FaceRecDataContext dc = new FaceRecDataContext();
+        public static FaceRecoDbContext dc = new FaceRecoDbContext();
         static public List<FaceEncoding> lstEncods=new List<FaceEncoding>();
 
 

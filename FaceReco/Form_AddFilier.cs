@@ -60,8 +60,8 @@ namespace FaceReco
                     nomF = txt_nomF.Text.ToUpper(),
                     intitule = txt_intitule.Text
                 };
-                Program.dc.Filiers.InsertOnSubmit(f);
-                Program.dc.SubmitChanges();
+                Program.dc.Filiers.Add(f);
+                Program.dc.SaveChanges();
                 MessageBox.Show("Créé avec Succès", "L'ajoute d'un Filiere", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -74,7 +74,7 @@ namespace FaceReco
         {
             Fil.nomF = txt_nomF.Text;
             Fil.intitule = txt_intitule.Text;
-            Program.dc.SubmitChanges();
+            Program.dc.SaveChanges();
             MessageBox.Show("Edité avec succès", "L'édition d'un Filiere", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

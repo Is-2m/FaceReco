@@ -77,8 +77,8 @@ namespace FaceReco
                 g.idG = ++lastGivenId;
                 g.numG = int.Parse(txt_NumG.Text);
                 g.idF = f.idF;
-                Program.dc.Groupes.InsertOnSubmit(g);
-                Program.dc.SubmitChanges();
+                Program.dc.Groupes.Add(g);
+                Program.dc.SaveChanges();
                 MessageBox.Show("Créé avec Succès", "L'ajoute d'un Groupe", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -90,7 +90,7 @@ namespace FaceReco
         void Modify()
         {
             Grp.numG = int.Parse(txt_NumG.Text);
-            Program.dc.SubmitChanges();
+            Program.dc.SaveChanges();
             MessageBox.Show("Edité avec succès", "L'édition d'un Groupe", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }

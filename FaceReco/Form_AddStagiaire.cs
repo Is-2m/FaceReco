@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Imaging;
 using FaceRecognitionDotNet;
+using System.Data.Objects.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -106,7 +107,8 @@ namespace FaceReco
                 var selectedGroupe = selectedFiliere.Groupes.First(obj => obj.numG == int.Parse(cb_Grp.SelectedItem.ToString()));
                 Stagiaire s = new Stagiaire();
                 stagiaireEncod fe = new stagiaireEncod();
-                s.CEF = Int64.Parse(txt_CEF.Text);
+                //var cef = Convert.ToInt64(txt_CEF.Text);
+                s.CEF = Convert.ToInt64(txt_CEF.Text);
                 s.cin = txt_Cin.Text;
                 s.nom = txt_Nom.Text;
                 s.prenom = txt_Prenom.Text;
@@ -116,9 +118,9 @@ namespace FaceReco
                 fe.cef = s.CEF;
                 fe.stringEncod = encode;
                 fe.Stagiaire = s;
-                Program.dc.Stagiaires.InsertOnSubmit(s);
-                Program.dc.stagiaireEncods.InsertOnSubmit(fe);
-                Program.dc.SubmitChanges();
+                Program.dc.Stagiaires.Add(s);
+                Program.dc.stagiaireEncods.Add(fe);
+                Program.dc.SaveChanges();
                 MessageBox.Show("Ajouter avec Succès", "L'ajoute d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -152,10 +154,10 @@ namespace FaceReco
                     fe.cef = Stgr.CEF;
                     fe.stringEncod = encode;
                     fe.Stagiaire = Stgr;
-                    Program.dc.stagiaireEncods.InsertOnSubmit(fe);
+                    Program.dc.stagiaireEncods.Add(fe);
                 }
             }
-            Program.dc.SubmitChanges();
+            Program.dc.SaveChanges();
             MessageBox.Show("Edité avec succès", "L'édition d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

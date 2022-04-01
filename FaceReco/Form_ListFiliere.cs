@@ -80,7 +80,7 @@ namespace FaceReco
             if (DialogResult.Yes == r)
             {
                 var fil = Program.dc.Filiers.First(obj => obj.nomF==nomF);
-                Program.dc.Filiers.DeleteOnSubmit(fil);
+                Program.dc.Filiers.Remove(fil);
                 dgv_Fil.Rows.RemoveAt(pos);
                 //Program.dc.SubmitChanges();
             }
@@ -95,7 +95,7 @@ namespace FaceReco
             if (DialogResult.Yes == r)
             {
                 var grp = Program.dc.Groupes.First(obj => obj.Filier.nomF.ToUpper() == NomfNumG[0].ToUpper() && obj.numG == int.Parse(NomfNumG[1]));
-                Program.dc.Groupes.DeleteOnSubmit(grp);
+                Program.dc.Groupes.Remove(grp);
                 dgv_Grp.Rows.RemoveAt(pos);
                 //Program.dc.SubmitChanges();
             }
@@ -103,7 +103,7 @@ namespace FaceReco
 
         private void btn_Save_Exite_Click(object sender, EventArgs e)
         {
-            Program.dc.SubmitChanges();
+            Program.dc.SaveChanges();
             this.Close();
         }
 

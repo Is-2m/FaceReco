@@ -85,7 +85,7 @@ namespace FaceReco
 
         private void sauvegarderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.dc.SubmitChanges();
+            Program.dc.SaveChanges();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -100,6 +100,16 @@ namespace FaceReco
 
         private void Main_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
+        }
+
+        private void openToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            var f = new Form_PresenceSheet();
+            f.MdiParent = this;
+            f.Dock = DockStyle.Fill;
+            f.Show();
         }
     }
 }

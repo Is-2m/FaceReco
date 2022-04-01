@@ -44,6 +44,8 @@ namespace FaceReco
             this.listerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.faceRecoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.feuilleDePresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +56,8 @@ namespace FaceReco
             this.filiersToolStripMenuItem,
             this.groupesToolStripMenuItem,
             this.stagiairesToolStripMenuItem,
-            this.faceRecoToolStripMenuItem});
+            this.faceRecoToolStripMenuItem,
+            this.feuilleDePresenceToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(874, 24);
@@ -142,14 +145,14 @@ namespace FaceReco
             // ajouterStagiaireToolStripMenuItem
             // 
             this.ajouterStagiaireToolStripMenuItem.Name = "ajouterStagiaireToolStripMenuItem";
-            this.ajouterStagiaireToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.ajouterStagiaireToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ajouterStagiaireToolStripMenuItem.Text = "Ajouter Stagiaire";
             this.ajouterStagiaireToolStripMenuItem.Click += new System.EventHandler(this.ajouterStagiaireToolStripMenuItem_Click);
             // 
             // listerToolStripMenuItem
             // 
             this.listerToolStripMenuItem.Name = "listerToolStripMenuItem";
-            this.listerToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.listerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listerToolStripMenuItem.Text = "Lister Stagiaires";
             this.listerToolStripMenuItem.Click += new System.EventHandler(this.listerToolStripMenuItem_Click);
             // 
@@ -164,9 +167,24 @@ namespace FaceReco
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // feuilleDePresenceToolStripMenuItem
+            // 
+            this.feuilleDePresenceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem1});
+            this.feuilleDePresenceToolStripMenuItem.Name = "feuilleDePresenceToolStripMenuItem";
+            this.feuilleDePresenceToolStripMenuItem.Size = new System.Drawing.Size(119, 20);
+            this.feuilleDePresenceToolStripMenuItem.Text = "Feuille de Presence";
+            // 
+            // openToolStripMenuItem1
+            // 
+            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
+            this.openToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem1.Text = "Open";
+            this.openToolStripMenuItem1.Click += new System.EventHandler(this.openToolStripMenuItem1_Click);
             // 
             // Main_Form
             // 
@@ -206,6 +224,8 @@ namespace FaceReco
         private System.Windows.Forms.ToolStripMenuItem sauvegarderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem faceRecoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem feuilleDePresenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem1;
     }
 }
 
