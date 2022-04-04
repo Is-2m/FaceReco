@@ -32,19 +32,23 @@ namespace FaceReco
 
         void Stgr_Refresh()
         {
-            dgv_stgr.Rows.Clear();
-            int pos = dgv_Grp.CurrentCell.RowIndex;
-            string text = (string)dgv_Grp.Rows[pos].Cells[0].Value;
-            MessageBox.Show(text);
-            string[] title = text.Split(' ');
-            var grp = Program.dc.Groupes.FirstOrDefault(obj => obj.Filier.nomF == title[0] && obj.numG == int.Parse(title[1]));
-            if(grp!=null)
+            try
             {
-                foreach (var s in grp.Stagiaires)
+                dgv_stgr.Rows.Clear();
+                int pos = dgv_Grp.CurrentCell.RowIndex;
+                string text = (string)dgv_Grp.Rows[pos].Cells[0].Value;
+                string[] title = text.Split(' ');
+                var grp = Program.dc.Groupes.First(obj => obj.Filier.nomF == title.First() && obj.numG == int.Parse(title.Last()));
+                if (grp != null)
                 {
-                    dgv_stgr.Rows.Add(s.CEF, s.cin, s.nom.ToUpper(), s.prenom.ToUpper(), s.ville, s.adresse);
+                    foreach (var s in grp.Stagiaires)
+                    {
+                        dgv_stgr.Rows.Add(s.CEF, s.cin, s.nom.ToUpper(), s.prenom.ToUpper(), s.ville, s.adresse);
+                    }
                 }
             }
+            catch (Exception)
+            {}
         }
 
 
@@ -79,23 +83,30 @@ namespace FaceReco
 
         private void btn_Del_Grp_Click(object sender, EventArgs e)
         {
-            int pos = dgv_Grp.CurrentCell.RowIndex;
-            string nomF = dgv_Grp.Rows[pos].Cells[0].Value.ToString();
-            string[] NomfNumG = nomF.Split(' ');
-            DialogResult r = MessageBox.Show("Voulez-vous supprimer cette sauvegarde?", "Suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (DialogResult.Yes == r)
+            try
             {
-                var grp = Program.dc.Groupes.First(obj => obj.Filier.nomF.ToUpper() == NomfNumG[0].ToUpper() && obj.numG == int.Parse(NomfNumG[1]));
-                Program.dc.Groupes.Remove(grp);
-                dgv_Grp.Rows.RemoveAt(pos);
-                //Program.dc.SubmitChanges();
-            }
+                int pos = dgv_Grp.CurrentCell.RowIndex;
+                string nomF = dgv_Grp.Rows[pos].Cells[0].Value.ToString();
+                string[] NomfNumG = nomF.Split(' ');
+                DialogResult r = MessageBox.Show("Voulez-vous supprimer cette sauvegarde?", "Suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (DialogResult.Yes == r)
+                {
+                    var grp = Program.dc.Groupes.AsEnumerable().FirstOrDefault(obj => obj.Filier.nomF.ToUpper() == NomfNumG.FirstOrDefault().ToUpper() && obj.numG == int.Parse(NomfNumG.LastOrDefault()));
+                    Program.dc.Groupes.Remove(grp);
+                    dgv_Grp.Rows.RemoveAt(pos);
+                    ////Program.dc.SubmitChanges();
+                }
         }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+}
 
         private void btn_Del_Stgr_Click(object sender, EventArgs e)
         {
             int pos = dgv_stgr.CurrentCell.RowIndex;
-            long cef = long.Parse(dgv_stgr.Rows[pos].Cells[0].Value.ToString());
+            int cef = int.Parse(dgv_stgr.Rows[pos].Cells[0].Value.ToString());
             DialogResult r = MessageBox.Show("Voulez-vous supprimer cette sauvegarde?", "Suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult.Yes == r)
             {
@@ -109,7 +120,7 @@ namespace FaceReco
         private void btn_Edit_Stgr_Click(object sender, EventArgs e)
         {
             int pos = dgv_stgr.CurrentCell.RowIndex;
-            long cef = long.Parse(dgv_stgr.Rows[pos].Cells[0].Value.ToString());
+            int cef = int.Parse(dgv_stgr.Rows[pos].Cells[0].Value.ToString());
             var stgr = Program.dc.Stagiaires.First(obj => obj.CEF == cef);
             var f = new Form_AddStagiaire(stgr);
             f.ShowDialog();

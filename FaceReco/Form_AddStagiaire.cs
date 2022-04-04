@@ -40,26 +40,26 @@ namespace FaceReco
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (Stgr == null)
                     Create();
                 else
                     Modify();
                 Program.loadEncodings();
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-                MessageBox.Show(ex.Message, "L'ajoute d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    MessageBox.Show(ex.Message, "L'ajoute d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
             videoCapture.Dispose();
 
             this.Close();
         }
         bool CheckExistence()
         {
-            var exist = Program.dc.Stagiaires.Any(obj => obj.CEF == Int64.Parse(txt_CEF.Text));
+            var exist = Program.dc.Stagiaires.Any(obj => obj.CEF == int.Parse(txt_CEF.Text));
             return exist;
         }
 
@@ -101,6 +101,8 @@ namespace FaceReco
         }
         void Create()
         {
+
+            //var cef = Convert.ToInt32(this.txt_CEF.Text);
             if (!CheckExistence())
             {
                 var selectedFiliere = Program.dc.Filiers.First(obj => obj.nomF == cb_Fil.SelectedItem.ToString());
@@ -108,7 +110,7 @@ namespace FaceReco
                 Stagiaire s = new Stagiaire();
                 stagiaireEncod fe = new stagiaireEncod();
                 //var cef = Convert.ToInt64(txt_CEF.Text);
-                s.CEF = Convert.ToInt64(txt_CEF.Text);
+                s.CEF = 1234;
                 s.cin = txt_Cin.Text;
                 s.nom = txt_Nom.Text;
                 s.prenom = txt_Prenom.Text;

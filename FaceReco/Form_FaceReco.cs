@@ -134,18 +134,27 @@ namespace FaceReco
 
                 }
                 SwitchMode(isFound);
-                //if (!isFound)
-                //{
+                if (!isFound)
+                {
+                    try
+                    {
+                        //String pth = Application.StartupPath + $@"\unknowen Images\";
+                        //MessageBox.Show(pth);
+                        //pb_live.Image.Sa
+                        //File.Move(Path.Combine(Directory.GetCurrentDirectory(),fileName), Path.Combine(Directory.GetCurrentDirectory(), $@"\unknowen Images\", fileName) );
+                        var d = DateTime.Now;
+                        addToPresenceHistory("");
+                        String fileName = $"Inconnu {d.Year}{d.Month}{d.Day}{d.Hour}{d.Minute}{d.Second}{d.Millisecond}.png";
+                        Directory.CreateDirectory(Application.StartupPath + $@"\unknowen Images\");
+                        bp.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);
+                        File.Move(Application.StartupPath + $@"\{fileName}", Application.StartupPath + $@"\unknowen Images\" + fileName);
+                    }
+                    catch (Exception ex)
+                    { }
+                }
 
-                //    addToPresenceHistory("");
-                //    String pth = Application.StartupPath + "\\unknowen Images\\Inconnu " + DateTime.Now.ToString().Replace("/", "-").Replace(":", "-") + ".jpg";
-                //    //MessageBox.Show(pth);
-                //    bp.Save(pth, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-                //}
 
 
-               
 
                 //FaceRe(bp);
             }
@@ -193,22 +202,7 @@ namespace FaceReco
         }
         public void pushTempPresenceHistoriesToDB()
         {
-            //MessageBox.Show("temp " + tempPresenceHistories.Count.ToString());
-            //var lst = new List<presenceHistory>();
-            //foreach (var item in tempPresenceHistories)
-            //{
-            //    if (!lst.Any(i => i.cef == item.cef))
-            //    {
-            //        var p = new presenceHistory();
-            //        p.cef = item.cef;
-            //        p.dateHistory = item.dateHistory;
-            //        lst.Add(p);
-            //        MessageBox.Show("inside if " + lst.Count.ToString());
-            //    }
-            //}
-            //MessageBox.Show("lst " + lst.Count.ToString());
 
-            //MessageBox.Show("2");
             Program.dc.presenceHistories.AddRange(tempPresenceHistories);
             Program.dc.SaveChanges();
         }

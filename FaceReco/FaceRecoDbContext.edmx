@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="FaceRecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Filier">
+		  <EntityType Name="Filier">
           <Key>
             <PropertyRef Name="idF" />
           </Key>
@@ -25,15 +25,15 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cef" Type="bigint" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cef" Type="int" />
           <Property Name="dateHistory" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Stagiaire">
           <Key>
             <PropertyRef Name="CEF" />
           </Key>
-          <Property Name="CEF" Type="bigint" Nullable="false" />
+          <Property Name="CEF" Type="int" Nullable="false" />
           <Property Name="cin" Type="varchar" MaxLength="10" />
           <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
@@ -45,7 +45,7 @@
           <Key>
             <PropertyRef Name="cef" />
           </Key>
-          <Property Name="cef" Type="bigint" Nullable="false" />
+          <Property Name="cef" Type="int" Nullable="false" />
           <Property Name="stringEncod" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK__presenceHis__cef__498EEC8D">
@@ -128,7 +128,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FaceRecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Filier">
+		  <Function Name="ParseInt32" ReturnType="Edm.Int32">
+			  <Parameter Name="stringvalue" Type="Edm.String" />
+			  <DefiningExpression>
+				  cast(stringvalue as Edm.Int32)
+			  </DefiningExpression>
+		  </Function>
+		  <EntityType Name="Filier">
           <Key>
             <PropertyRef Name="idF" />
           </Key>
@@ -151,8 +157,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cef" Type="Int64" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cef" Type="Int32" />
           <Property Name="dateHistory" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Stagiaire" Relationship="Self.FK__presenceHis__cef__498EEC8D" FromRole="presenceHistory" ToRole="Stagiaire" />
         </EntityType>
@@ -160,7 +166,7 @@
           <Key>
             <PropertyRef Name="CEF" />
           </Key>
-          <Property Name="CEF" Type="Int64" Nullable="false" />
+          <Property Name="CEF" Type="Int32" Nullable="false" />
           <Property Name="cin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -175,7 +181,7 @@
           <Key>
             <PropertyRef Name="cef" />
           </Key>
-          <Property Name="cef" Type="Int64" Nullable="false" />
+          <Property Name="cef" Type="Int32" Nullable="false" />
           <Property Name="stringEncod" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Stagiaire" Relationship="Self.FK__stagiaireEn__cef__29221CFB" FromRole="stagiaireEncod" ToRole="Stagiaire" />
         </EntityType>

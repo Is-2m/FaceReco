@@ -14,8 +14,8 @@ namespace FaceReco
     
     public partial class presenceHistory
     {
-        public long id { get; set; }
-        public Nullable<long> cef { get; set; }
+        public int id { get; set; }
+        public Nullable<int> cef { get; set; }
         public System.DateTime dateHistory { get; set; }
     
         public virtual Stagiaire Stagiaire { get; set; }
