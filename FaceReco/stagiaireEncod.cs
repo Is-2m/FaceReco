@@ -14,7 +14,7 @@ namespace FaceReco
     
     public partial class stagiaireEncod
     {
-        public int cef { get; set; }
+        public string cef { get; set; }
         public string stringEncod { get; set; }
     
         public virtual Stagiaire Stagiaire { get; set; }

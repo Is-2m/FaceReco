@@ -106,7 +106,7 @@ namespace FaceReco
         private void btn_Del_Stgr_Click(object sender, EventArgs e)
         {
             int pos = dgv_stgr.CurrentCell.RowIndex;
-            int cef = int.Parse(dgv_stgr.Rows[pos].Cells[0].Value.ToString());
+            String cef = dgv_stgr.Rows[pos].Cells[0].Value.ToString();
             DialogResult r = MessageBox.Show("Voulez-vous supprimer cette sauvegarde?", "Suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult.Yes == r)
             {
@@ -120,7 +120,7 @@ namespace FaceReco
         private void btn_Edit_Stgr_Click(object sender, EventArgs e)
         {
             int pos = dgv_stgr.CurrentCell.RowIndex;
-            int cef = int.Parse(dgv_stgr.Rows[pos].Cells[0].Value.ToString());
+            String cef = dgv_stgr.Rows[pos].Cells[0].Value.ToString();
             var stgr = Program.dc.Stagiaires.First(obj => obj.CEF == cef);
             var f = new Form_AddStagiaire(stgr);
             f.ShowDialog();

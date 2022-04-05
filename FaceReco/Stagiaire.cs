@@ -20,7 +20,7 @@ namespace FaceReco
             this.presenceHistories = new HashSet<presenceHistory>();
         }
     
-        public int CEF { get; set; }
+        public string CEF { get; set; }
         public string cin { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }

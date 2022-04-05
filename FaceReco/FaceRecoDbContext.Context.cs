@@ -11,7 +11,6 @@ namespace FaceReco
 {
     using System;
     using System.Data.Entity;
-    using System.Data.Objects.DataClasses;
     using System.Data.Entity.Infrastructure;
     
     public partial class FaceRecoDbContext : DbContext
@@ -25,12 +24,7 @@ namespace FaceReco
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        [System.Data.Entity.DbFunction("FaceRecModel", "ParseInt32")]
-        public static Int32 ParseInt32(string stringvalue)
-        {
-            return int.Parse(stringvalue);
-        }
+    
         public virtual DbSet<Filier> Filiers { get; set; }
         public virtual DbSet<Groupe> Groupes { get; set; }
         public virtual DbSet<presenceHistory> presenceHistories { get; set; }

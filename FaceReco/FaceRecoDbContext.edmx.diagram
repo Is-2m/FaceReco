@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a37b958a247b415bad8ab5adea392b29" Name="Diagram1">
+      <Diagram DiagramId="71bd70a9779d4ea0b8b6d8e47d1e043e" Name="Diagram1">
         <EntityTypeShape EntityType="FaceRecModel.Filier" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FaceRecModel.Groupe" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FaceRecModel.presenceHistory" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />

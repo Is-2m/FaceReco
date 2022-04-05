@@ -37,8 +37,11 @@ namespace FaceReco
             {
                 foreach (var f in dc.stagiaireEncods)
                 {
-                    var doubleEncod = Array.ConvertAll(f.stringEncod.Split(','), Double.Parse);
-                    lstEncods.Add(FaceRecognition.LoadFaceEncoding(doubleEncod));
+                    if (f.stringEncod != null)
+                    {
+                        var doubleEncod = Array.ConvertAll(f.stringEncod.Split(','), Double.Parse);
+                        lstEncods.Add(FaceRecognition.LoadFaceEncoding(doubleEncod));
+                    }
                 }
             }
         }

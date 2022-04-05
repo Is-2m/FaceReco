@@ -58,37 +58,38 @@ namespace FaceReco
         }
         private void VideoCapture_ImageGrabbed(object sender, EventArgs e)
         {
-            try
+            //try
+            //{
+            Mat m = new Mat();
+            videoCapture.Retrieve(m);
+
+            byte[] bytes = m.ToImage<Bgr, byte>().ToJpegData();
+            Bitmap bp = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+            var rects = cascadeClassifier.DetectMultiScale(m, 1.1, 3, Size.Empty, Size.Empty);
+            Pen p = new Pen(Color.Green, 3);
+            graph = Graphics.FromImage(bp);
+            foreach (var rect in rects)
             {
-                Mat m = new Mat();
-                videoCapture.Retrieve(m);
+                graph.DrawRectangle(p, rect);
+            }
 
-                byte[] bytes = m.ToImage<Bgr, byte>().ToJpegData();
-                Bitmap bp = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
-                var rects = cascadeClassifier.DetectMultiScale(m, 1.1, 3, Size.Empty, Size.Empty);
-                graph = Graphics.FromImage(bp);
-                foreach (var rect in rects)
-                {
-                    graph.DrawRectangle(Pens.Green, rect);
-                }
+            var bp2 = new Bitmap(bp, bp.Width / 4, bp.Height / 4);
 
-                var bp2 = new Bitmap(bp, bp.Width / 4, bp.Height / 4);
-
-                frm++;
-                if (frm == 5)
-                {
-                    frm = 0;
-                    new Task(() => { NewMeth(bp2); }).Start();
-                    //NewMeth(bp2);
-
-                }
-
-                //newMeth(bp2);
-                pb_live.Image = bp;
+            frm++;
+            if (frm == 5)
+            {
+                frm = 0;
+                new Task(() => { NewMeth(bp2); }).Start();
+                //NewMeth(bp2);
 
             }
-            catch (Exception)
-            { /*SetText(""); */}
+
+            //newMeth(bp2);
+            pb_live.Image = bp;
+
+            //}
+            //catch (Exception)
+            //{ /*SetText(""); */}
         }
 
         private void Form_FaceReco_FormClosing(object sender, FormClosingEventArgs e)
@@ -103,11 +104,11 @@ namespace FaceReco
             if (loc.Count() != 0)
             {
                 //MessageBox.Show("FaceDetected");
-                foreach (var l in loc)
-                {
+                //foreach (var l in loc)
+                //{
 
-                    graph.DrawRectangle(Pens.Green, l.Left * 4, l.Top * 4, (l.Right - l.Left) * 4, (l.Bottom - l.Top) * 4);
-                }
+                //    graph.DrawRectangle(Pens.Green, l.Left * 4, l.Top * 4, (l.Right - l.Left) * 4, (l.Bottom - l.Top) * 4);
+                //}
                 IEnumerable<FaceEncoding> encd = fr.FaceEncodings(img, loc);
                 const double tolerance = 0.5d;
                 bool isFound = false;
@@ -133,7 +134,15 @@ namespace FaceReco
 
 
                 }
-                SwitchMode(isFound);
+
+                //SwitchMode(isFound);
+                //new Task(() => { SwitchMode(isFound); }).Start();
+
+
+
+                kda(isFound);
+
+
                 if (!isFound)
                 {
                     try
@@ -177,7 +186,7 @@ namespace FaceReco
                 {
                     var entity = new presenceHistory();
                     entity.dateHistory = DateTime.Now;
-                    entity.cef = 0;
+                    entity.cef = "";
                 }
                 else
                 {
@@ -200,6 +209,12 @@ namespace FaceReco
 
 
         }
+        void kda(bool isFound)
+        {
+            pan_red.Visible = !isFound;
+            //pan_red.Enabled = !isFound;
+            pan_green.Visible = isFound;
+        }
         public void pushTempPresenceHistoriesToDB()
         {
 
@@ -212,14 +227,16 @@ namespace FaceReco
 
         private void SwitchMode(bool b)
         {
+            MessageBox.Show("inside");
             if (this.pan_green.InvokeRequired)
             {
+                MessageBox.Show("in if");
                 SetTextCallback d = new SetTextCallback(SwitchMode);
                 this.Invoke(d, new object[] { b });
             }
             else
             {
-
+                MessageBox.Show("in else");
                 this.pan_red.Visible = !b;
                 this.pan_green.Visible = b;
 
@@ -292,5 +309,6 @@ namespace FaceReco
             stop();
             this.Close();
         }
+
     }
 }

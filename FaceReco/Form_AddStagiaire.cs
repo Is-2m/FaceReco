@@ -59,7 +59,7 @@ namespace FaceReco
         }
         bool CheckExistence()
         {
-            var exist = Program.dc.Stagiaires.Any(obj => obj.CEF == int.Parse(txt_CEF.Text));
+            var exist = Program.dc.Stagiaires.Any(obj => obj.CEF == txt_CEF.Text);
             return exist;
         }
 
@@ -110,7 +110,7 @@ namespace FaceReco
                 Stagiaire s = new Stagiaire();
                 stagiaireEncod fe = new stagiaireEncod();
                 //var cef = Convert.ToInt64(txt_CEF.Text);
-                s.CEF = 1234;
+                s.CEF = txt_CEF.Text;
                 s.cin = txt_Cin.Text;
                 s.nom = txt_Nom.Text;
                 s.prenom = txt_Prenom.Text;
