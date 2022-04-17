@@ -136,15 +136,15 @@ namespace FaceReco
 
         void show_infos()
         {
-            cb_Fil.Text = Stgr.Groupe.Filier.nomF;
-            cb_Grp.Text = Stgr.Groupe.numG.ToString();
+            cb_Fil.Text = Stgr.Groupe == null ? "" : Stgr.Groupe.Filier.nomF;
+            cb_Grp.Text = Stgr.Groupe == null ? "" : Stgr.Groupe.numG.ToString();
             txt_CEF.Text = Stgr.CEF.ToString();
             txt_CEF.Enabled = false;
-            txt_Cin.Text = Stgr.cin.ToString();
+            txt_Cin.Text = Stgr.cin == null ? "null" : Stgr.cin.ToString();
             txt_Nom.Text = Stgr.nom;
             txt_Prenom.Text = Stgr.prenom;
-            txt_ville.Text = Stgr.ville;
-            txt_addresse.Text = Stgr.adresse;
+            txt_ville.Text = Stgr.ville == null ? "null" : Stgr.ville;
+            txt_addresse.Text = Stgr.adresse == null ? "null" : Stgr.adresse;
         }
 
         private void btn_capture_Click(object sender, EventArgs e)

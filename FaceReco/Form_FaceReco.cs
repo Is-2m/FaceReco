@@ -109,7 +109,7 @@ namespace FaceReco
                 IEnumerable<FaceEncoding> encd = fr.FaceEncodings(img, loc);
                 const double tolerance = 0.5d;
                 bool isFound = false;
-
+                string strEncod = "";
                 for (int i = 0; i < lstEncods.Count; i++)
                 {
                     for (int j = 0; j < encd.Count(); j++)
@@ -118,27 +118,32 @@ namespace FaceReco
                         {
                             isFound = true;
                             var s = String.Join(",", lstEncods[i].GetRawEncoding());
-                            addToPresenceHistory(isFound, s, faceEncod: encd.First());
+                            strEncod = s;
+                            addToPresenceHistory(strEncod: s);
                             break;
                         }
                     }
                 }
-                switchPanels(isFound);
+                switchPanels(isFound, strEncod);
                 if (!isFound)
                 {
                     try
                     {
                         var d = DateTime.Now;
                         String fileName = $"Inconnu {d.Year}{d.Month}{d.Day}{d.Hour}{d.Minute}{d.Second}{d.Millisecond}.png";
-                        addToPresenceHistory(isFound, String.Join(",", encd.First().GetRawEncoding()), d, fileName.Replace(".png", ""), encd.First());
+
+                        addToPresenceHistory(strEncod: String.Join(",", encd.First().GetRawEncoding()), dt: d, cef: fileName.Replace(".png", ""));
+
 
                         Stagiaire s = new Stagiaire();
-                        var entity = new presenceHistory();
                         s.CEF = fileName.Replace(".png", "");
                         s.stringEncod = String.Join(",", encd.First().GetRawEncoding());
                         s.nom = "inconnu";
                         s.prenom = "inconnu";
+                        Program.dc.Stagiaires.Add(s);
+                        Program.dc.SaveChanges();
                         Program.loadEncodings();
+                        this.lstEncods = Program.lstEncods;
 
                         Directory.CreateDirectory(Application.StartupPath + $@"\unknowen Images\");
                         OrgBp.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);
@@ -173,7 +178,7 @@ namespace FaceReco
         }
         #endregion
         #region Methods
-        void addToPresenceHistory(bool isFound, string strEncod, DateTime? dt = null, string cef = "", FaceEncoding faceEncod = null)
+        void addToPresenceHistory(string strEncod = "", DateTime? dt = null, string cef = "")
         {
             try
             {
@@ -183,43 +188,41 @@ namespace FaceReco
                     currentHour = DateTime.Now.Hour;
                     tempPresenceHistories = new List<presenceHistory>();
                 }
-                if (!isFound)
+                var Stgr = Program.dc.Stagiaires.First(obj => obj.stringEncod == strEncod);
+                var entity = new presenceHistory();
+                entity.dateHistory = dt == null ? DateTime.Now : dt.Value;
+                entity.cef = cef != "" ? cef : Stgr.CEF;
+                if (!tempPresenceHistories.Any(e => e.cef == entity.cef))
                 {
-                    var result = FaceRecognition.CompareFaces(lstEncods.AsEnumerable(), faceEncod, 0.5d);
-
-                    if (result.ToList().IndexOf(true) == -1)
-                    {
-                        MessageBox.Show("im there");
-                        Program.dc.Stagiaires.Add(s);
-                        Program.dc.SaveChanges();
-
-                        entity.dateHistory = dt.Value;
-                        entity.cef = strEncod;
-
-                        tempPresenceHistories.Add(entity);
-
-                    }
-                }
-                else
-                {
-                    var Stgr = Program.dc.Stagiaires.First(obj => obj.stringEncod == strEncod);
-                    var entity = new presenceHistory();
-                    entity.dateHistory = DateTime.Now;
-                    entity.cef = Stgr.CEF;
-                    entity.Stagiaire = Stgr;
-                    if (!tempPresenceHistories.Any(e => e.cef == entity.cef))
-                    {
-                        tempPresenceHistories.Add(entity);
-                    }
+                    tempPresenceHistories.Add(entity);
                 }
             }
             catch (Exception)
             { }
         }
-        void switchPanels(bool isFound)
+        void switchPanels(bool isFound, string strEncod = "")
         {
-            pan_red.Invoke((MethodInvoker)(() => pan_red.Visible = !isFound));
-            pan_green.Invoke((MethodInvoker)(() => pan_green.Visible = isFound));
+            try
+            {
+                pan_red.Invoke((MethodInvoker)(() => pan_red.Visible = !isFound));
+                pan_green.Invoke((MethodInvoker)(() => pan_green.Visible = isFound));
+                if (isFound && strEncod != "")
+                {
+                    var Stgr = Program.dc.Stagiaires.First(obj => obj.stringEncod == strEncod);
+
+                    txt_CEF.Invoke((MethodInvoker)(() => txt_CEF.Text = Stgr.CEF));
+                    txt_Cin.Invoke((MethodInvoker)(() => txt_Cin.Text = Stgr.cin == null ? "null" : Stgr.cin));
+                    txt_Nom.Invoke((MethodInvoker)(() => txt_Nom.Text = Stgr.nom));
+                    txt_Prenom.Invoke((MethodInvoker)(() => txt_Prenom.Text = Stgr.prenom));
+                    txt_ville.Invoke((MethodInvoker)(() => txt_ville.Text = Stgr.ville == null ? "null" : Stgr.ville));
+                    txt_addresse.Invoke((MethodInvoker)(() => txt_addresse.Text = Stgr.adresse == null ? "null" : Stgr.adresse));
+
+                }
+            }
+            catch ( Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void pushTempPresenceHistoriesToDB()
         {
