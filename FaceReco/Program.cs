@@ -33,13 +33,13 @@ namespace FaceReco
         }
         public static void loadEncodings()
         {
-            if (dc.stagiaireEncods.Count() != 0)
+            if (dc.Stagiaires.Count() != 0)
             {
-                foreach (var f in dc.stagiaireEncods)
+                foreach (var s in dc.Stagiaires)
                 {
-                    if (f.stringEncod != null)
+                    if (s.stringEncod != null)
                     {
-                        var doubleEncod = Array.ConvertAll(f.stringEncod.Split(','), Double.Parse);
+                        var doubleEncod = Array.ConvertAll(s.stringEncod.Split(','), Double.Parse);
                         lstEncods.Add(FaceRecognition.LoadFaceEncoding(doubleEncod));
                     }
                 }

@@ -29,10 +29,10 @@ namespace FaceReco
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_Save_Exite = new System.Windows.Forms.Button();
             this.dgv_stgr = new System.Windows.Forms.DataGridView();
             this.CEF = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +48,7 @@ namespace FaceReco
             this.btn_Edit_Stgr = new System.Windows.Forms.Button();
             this.btn_Add_Stgr = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
+            this.btn_del_dup = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_stgr)).BeginInit();
             this.gb_Stgr.SuspendLayout();
             this.SuspendLayout();
@@ -85,16 +86,16 @@ namespace FaceReco
             // 
             // CEF
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.CEF.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CEF.DefaultCellStyle = dataGridViewCellStyle9;
             this.CEF.HeaderText = "CEF";
             this.CEF.Name = "CEF";
             this.CEF.ReadOnly = true;
             // 
             // cin
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cin.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cin.DefaultCellStyle = dataGridViewCellStyle10;
             this.cin.HeaderText = "Cin";
             this.cin.Name = "cin";
             this.cin.ReadOnly = true;
@@ -115,8 +116,8 @@ namespace FaceReco
             // 
             // filiere
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.filiere.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.filiere.DefaultCellStyle = dataGridViewCellStyle11;
             this.filiere.HeaderText = "Filiere";
             this.filiere.Name = "filiere";
             this.filiere.ReadOnly = true;
@@ -124,8 +125,8 @@ namespace FaceReco
             // 
             // groupe
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.groupe.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.groupe.DefaultCellStyle = dataGridViewCellStyle12;
             this.groupe.HeaderText = "Groupe";
             this.groupe.Name = "groupe";
             this.groupe.ReadOnly = true;
@@ -195,11 +196,22 @@ namespace FaceReco
             this.btn_Close.UseVisualStyleBackColor = true;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
+            // btn_del_dup
+            // 
+            this.btn_del_dup.Location = new System.Drawing.Point(705, 202);
+            this.btn_del_dup.Name = "btn_del_dup";
+            this.btn_del_dup.Size = new System.Drawing.Size(108, 43);
+            this.btn_del_dup.TabIndex = 15;
+            this.btn_del_dup.Text = "Supprimer les doublons";
+            this.btn_del_dup.UseVisualStyleBackColor = true;
+            this.btn_del_dup.Click += new System.EventHandler(this.btn_del_dup_Click);
+            // 
             // Form_ListStagiaire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 506);
+            this.Controls.Add(this.btn_del_dup);
             this.Controls.Add(this.btn_Save_Exite);
             this.Controls.Add(this.dgv_stgr);
             this.Controls.Add(this.gb_Stgr);
@@ -231,5 +243,6 @@ namespace FaceReco
         private System.Windows.Forms.DataGridViewTextBoxColumn groupe;
         private System.Windows.Forms.DataGridViewTextBoxColumn ville;
         private System.Windows.Forms.DataGridViewTextBoxColumn adresse;
+        private System.Windows.Forms.Button btn_del_dup;
     }
 }

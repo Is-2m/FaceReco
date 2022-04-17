@@ -39,6 +39,7 @@ namespace FaceReco
             var f = new Form_ListFiliere();
             f.MdiParent = this;
             f.Dock = DockStyle.Fill;
+            this.Size = new Size(890, 570);
             f.Show();
         }
 
@@ -51,6 +52,7 @@ namespace FaceReco
             var f = new Form_ListGroupe();
             f.MdiParent = this;
             f.Dock = DockStyle.Fill;
+            this.Size = new Size(890, 570);
             f.Show();
         }
 
@@ -80,6 +82,7 @@ namespace FaceReco
             var f = new Form_ListStagiaire();
             f.MdiParent = this;
             f.Dock = DockStyle.Fill;
+            this.Size = new Size(890, 570);
             f.Show();
         }
 
@@ -95,6 +98,8 @@ namespace FaceReco
             var f = new Form_FaceReco();
             f.MdiParent = this;
             f.Dock = DockStyle.Fill;
+            //this.Size = new Size(950, 570);
+            this.Size = new Size(890, 570);
             f.Show();
         }
 
@@ -109,6 +114,7 @@ namespace FaceReco
             var f = new Form_PresenceSheet();
             f.MdiParent = this;
             f.Dock = DockStyle.Fill;
+            this.Size = new Size(890, 570);
             f.Show();
         }
     }

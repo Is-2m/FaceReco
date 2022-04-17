@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FaceRecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FaceRecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Filier">
           <Key>
             <PropertyRef Name="idF" />
@@ -40,15 +40,9 @@
           <Property Name="ville" Type="varchar" MaxLength="40" />
           <Property Name="adresse" Type="varchar" MaxLength="60" />
           <Property Name="idG" Type="int" />
-        </EntityType>
-        <EntityType Name="stagiaireEncod">
-          <Key>
-            <PropertyRef Name="cef" />
-          </Key>
-          <Property Name="cef" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="stringEncod" Type="varchar(max)" />
         </EntityType>
-        <Association Name="FK__presenceHis__cef__498EEC8D">
+        <Association Name="FK__presenceHis__cef__0880433F">
           <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="0..1" />
           <End Role="presenceHistory" Type="Self.presenceHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -56,18 +50,6 @@
               <PropertyRef Name="CEF" />
             </Principal>
             <Dependent Role="presenceHistory">
-              <PropertyRef Name="cef" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__stagiaireEn__cef__29221CFB">
-          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="1" />
-          <End Role="stagiaireEncod" Type="Self.stagiaireEncod" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Stagiaire">
-              <PropertyRef Name="CEF" />
-            </Principal>
-            <Dependent Role="stagiaireEncod">
               <PropertyRef Name="cef" />
             </Dependent>
           </ReferentialConstraint>
@@ -105,14 +87,9 @@
           <EntitySet Name="Groupe" EntityType="Self.Groupe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="presenceHistory" EntityType="Self.presenceHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stagiaire" EntityType="Self.Stagiaire" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="stagiaireEncod" EntityType="Self.stagiaireEncod" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__presenceHis__cef__498EEC8D" Association="Self.FK__presenceHis__cef__498EEC8D">
+          <AssociationSet Name="FK__presenceHis__cef__0880433F" Association="Self.FK__presenceHis__cef__0880433F">
             <End Role="Stagiaire" EntitySet="Stagiaire" />
             <End Role="presenceHistory" EntitySet="presenceHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK__stagiaireEn__cef__29221CFB" Association="Self.FK__stagiaireEn__cef__29221CFB">
-            <End Role="Stagiaire" EntitySet="Stagiaire" />
-            <End Role="stagiaireEncod" EntitySet="stagiaireEncod" />
           </AssociationSet>
           <AssociationSet Name="FK_Groupe" Association="Self.FK_Groupe">
             <End Role="Filier" EntitySet="Filier" />
@@ -123,11 +100,28 @@
             <End Role="Stagiaire" EntitySet="Stagiaire" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FaceRecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FaceRecoDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Filiers" EntityType="FaceRecModel.Filier" />
+          <EntitySet Name="Groupes" EntityType="FaceRecModel.Groupe" />
+          <EntitySet Name="presenceHistories" EntityType="FaceRecModel.presenceHistory" />
+          <EntitySet Name="Stagiaires" EntityType="FaceRecModel.Stagiaire" />
+          <AssociationSet Name="FK_Groupe" Association="FaceRecModel.FK_Groupe">
+            <End Role="Filier" EntitySet="Filiers" />
+            <End Role="Groupe" EntitySet="Groupes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stagiaire" Association="FaceRecModel.FK_Stagiaire">
+            <End Role="Groupe" EntitySet="Groupes" />
+            <End Role="Stagiaire" EntitySet="Stagiaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK__presenceHis__cef__0880433F" Association="FaceRecModel.FK__presenceHis__cef__0880433F">
+            <End Role="Stagiaire" EntitySet="Stagiaires" />
+            <End Role="presenceHistory" EntitySet="presenceHistories" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Filier">
           <Key>
             <PropertyRef Name="idF" />
@@ -135,7 +129,7 @@
           <Property Name="idF" Type="Int32" Nullable="false" />
           <Property Name="nomF" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="intitule" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Groupes" Relationship="Self.FK_Groupe" FromRole="Filier" ToRole="Groupe" />
+          <NavigationProperty Name="Groupes" Relationship="FaceRecModel.FK_Groupe" FromRole="Filier" ToRole="Groupe" />
         </EntityType>
         <EntityType Name="Groupe">
           <Key>
@@ -144,8 +138,8 @@
           <Property Name="idG" Type="Int32" Nullable="false" />
           <Property Name="numG" Type="Int32" Nullable="false" />
           <Property Name="idF" Type="Int32" />
-          <NavigationProperty Name="Filier" Relationship="Self.FK_Groupe" FromRole="Groupe" ToRole="Filier" />
-          <NavigationProperty Name="Stagiaires" Relationship="Self.FK_Stagiaire" FromRole="Groupe" ToRole="Stagiaire" />
+          <NavigationProperty Name="Filier" Relationship="FaceRecModel.FK_Groupe" FromRole="Groupe" ToRole="Filier" />
+          <NavigationProperty Name="Stagiaires" Relationship="FaceRecModel.FK_Stagiaire" FromRole="Groupe" ToRole="Stagiaire" />
         </EntityType>
         <EntityType Name="presenceHistory">
           <Key>
@@ -154,36 +148,28 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dateHistory" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Stagiaire" Relationship="Self.FK__presenceHis__cef__498EEC8D" FromRole="presenceHistory" ToRole="Stagiaire" />
+          <NavigationProperty Name="Stagiaire" Relationship="FaceRecModel.FK__presenceHis__cef__0880433F" FromRole="presenceHistory" ToRole="Stagiaire" />
         </EntityType>
         <EntityType Name="Stagiaire">
           <Key>
             <PropertyRef Name="CEF" />
           </Key>
-          <Property Name="CEF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CEF" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ville" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="adresse" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="idG" Type="Int32" />
-          <NavigationProperty Name="Groupe" Relationship="Self.FK_Stagiaire" FromRole="Stagiaire" ToRole="Groupe" />
-          <NavigationProperty Name="presenceHistories" Relationship="Self.FK__presenceHis__cef__498EEC8D" FromRole="Stagiaire" ToRole="presenceHistory" />
-          <NavigationProperty Name="stagiaireEncod" Relationship="Self.FK__stagiaireEn__cef__29221CFB" FromRole="Stagiaire" ToRole="stagiaireEncod" />
-        </EntityType>
-        <EntityType Name="stagiaireEncod">
-          <Key>
-            <PropertyRef Name="cef" />
-          </Key>
-          <Property Name="cef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="stringEncod" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Stagiaire" Relationship="Self.FK__stagiaireEn__cef__29221CFB" FromRole="stagiaireEncod" ToRole="Stagiaire" />
+          <NavigationProperty Name="Groupe" Relationship="FaceRecModel.FK_Stagiaire" FromRole="Stagiaire" ToRole="Groupe" />
+          <NavigationProperty Name="presenceHistories" Relationship="FaceRecModel.FK__presenceHis__cef__0880433F" FromRole="Stagiaire" ToRole="presenceHistory" />
         </EntityType>
         <Association Name="FK_Groupe">
-          <End Role="Filier" Type="Self.Filier" Multiplicity="0..1">
+          <End Type="FaceRecModel.Filier" Role="Filier" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
+          <End Type="FaceRecModel.Groupe" Role="Groupe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Filier">
               <PropertyRef Name="idF" />
@@ -194,10 +180,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Stagiaire">
-          <End Role="Groupe" Type="Self.Groupe" Multiplicity="0..1">
+          <End Type="FaceRecModel.Groupe" Role="Groupe" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="*" />
+          <End Type="FaceRecModel.Stagiaire" Role="Stagiaire" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Groupe">
               <PropertyRef Name="idG" />
@@ -207,9 +193,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__presenceHis__cef__498EEC8D">
-          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="0..1" />
-          <End Role="presenceHistory" Type="Self.presenceHistory" Multiplicity="*" />
+        <Association Name="FK__presenceHis__cef__0880433F">
+          <End Type="FaceRecModel.Stagiaire" Role="Stagiaire" Multiplicity="0..1" />
+          <End Type="FaceRecModel.presenceHistory" Role="presenceHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stagiaire">
               <PropertyRef Name="CEF" />
@@ -219,42 +205,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__stagiaireEn__cef__29221CFB">
-          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="1" />
-          <End Role="stagiaireEncod" Type="Self.stagiaireEncod" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Stagiaire">
-              <PropertyRef Name="CEF" />
-            </Principal>
-            <Dependent Role="stagiaireEncod">
-              <PropertyRef Name="cef" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="FaceRecoDbContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Filiers" EntityType="Self.Filier" />
-          <EntitySet Name="Groupes" EntityType="Self.Groupe" />
-          <EntitySet Name="presenceHistories" EntityType="Self.presenceHistory" />
-          <EntitySet Name="Stagiaires" EntityType="Self.Stagiaire" />
-          <EntitySet Name="stagiaireEncods" EntityType="Self.stagiaireEncod" />
-          <AssociationSet Name="FK_Groupe" Association="Self.FK_Groupe">
-            <End Role="Filier" EntitySet="Filiers" />
-            <End Role="Groupe" EntitySet="Groupes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Stagiaire" Association="Self.FK_Stagiaire">
-            <End Role="Groupe" EntitySet="Groupes" />
-            <End Role="Stagiaire" EntitySet="Stagiaires" />
-          </AssociationSet>
-          <AssociationSet Name="FK__presenceHis__cef__498EEC8D" Association="Self.FK__presenceHis__cef__498EEC8D">
-            <End Role="Stagiaire" EntitySet="Stagiaires" />
-            <End Role="presenceHistory" EntitySet="presenceHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK__stagiaireEn__cef__29221CFB" Association="Self.FK__stagiaireEn__cef__29221CFB">
-            <End Role="Stagiaire" EntitySet="Stagiaires" />
-            <End Role="stagiaireEncod" EntitySet="stagiaireEncods" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -263,48 +214,41 @@
           <EntitySetMapping Name="Filiers">
             <EntityTypeMapping TypeName="FaceRecModel.Filier">
               <MappingFragment StoreEntitySet="Filier">
-                <ScalarProperty Name="idF" ColumnName="idF" />
-                <ScalarProperty Name="nomF" ColumnName="nomF" />
                 <ScalarProperty Name="intitule" ColumnName="intitule" />
+                <ScalarProperty Name="nomF" ColumnName="nomF" />
+                <ScalarProperty Name="idF" ColumnName="idF" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Groupes">
             <EntityTypeMapping TypeName="FaceRecModel.Groupe">
               <MappingFragment StoreEntitySet="Groupe">
-                <ScalarProperty Name="idG" ColumnName="idG" />
-                <ScalarProperty Name="numG" ColumnName="numG" />
                 <ScalarProperty Name="idF" ColumnName="idF" />
+                <ScalarProperty Name="numG" ColumnName="numG" />
+                <ScalarProperty Name="idG" ColumnName="idG" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="presenceHistories">
             <EntityTypeMapping TypeName="FaceRecModel.presenceHistory">
               <MappingFragment StoreEntitySet="presenceHistory">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="cef" ColumnName="cef" />
                 <ScalarProperty Name="dateHistory" ColumnName="dateHistory" />
+                <ScalarProperty Name="cef" ColumnName="cef" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Stagiaires">
             <EntityTypeMapping TypeName="FaceRecModel.Stagiaire">
               <MappingFragment StoreEntitySet="Stagiaire">
-                <ScalarProperty Name="CEF" ColumnName="CEF" />
-                <ScalarProperty Name="cin" ColumnName="cin" />
-                <ScalarProperty Name="nom" ColumnName="nom" />
-                <ScalarProperty Name="prenom" ColumnName="prenom" />
-                <ScalarProperty Name="ville" ColumnName="ville" />
-                <ScalarProperty Name="adresse" ColumnName="adresse" />
-                <ScalarProperty Name="idG" ColumnName="idG" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="stagiaireEncods">
-            <EntityTypeMapping TypeName="FaceRecModel.stagiaireEncod">
-              <MappingFragment StoreEntitySet="stagiaireEncod">
-                <ScalarProperty Name="cef" ColumnName="cef" />
                 <ScalarProperty Name="stringEncod" ColumnName="stringEncod" />
+                <ScalarProperty Name="idG" ColumnName="idG" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="cin" ColumnName="cin" />
+                <ScalarProperty Name="CEF" ColumnName="CEF" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

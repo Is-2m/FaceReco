@@ -27,10 +27,10 @@ namespace FaceReco
         public string ville { get; set; }
         public string adresse { get; set; }
         public Nullable<int> idG { get; set; }
+        public string stringEncod { get; set; }
     
         public virtual Groupe Groupe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<presenceHistory> presenceHistories { get; set; }
-        public virtual stagiaireEncod stagiaireEncod { get; set; }
     }
 }

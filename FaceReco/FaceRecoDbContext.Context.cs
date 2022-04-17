@@ -29,6 +29,5 @@ namespace FaceReco
         public virtual DbSet<Groupe> Groupes { get; set; }
         public virtual DbSet<presenceHistory> presenceHistories { get; set; }
         public virtual DbSet<Stagiaire> Stagiaires { get; set; }
-        public virtual DbSet<stagiaireEncod> stagiaireEncods { get; set; }
     }
 }

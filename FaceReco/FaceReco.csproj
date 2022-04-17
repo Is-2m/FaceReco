@@ -14,6 +14,8 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <LangVersion>8.0</LangVersion>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -98,12 +100,6 @@
     <Compile Include="Form_FaceReco.Designer.cs">
       <DependentUpon>Form_FaceReco.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Loading.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Loading.Designer.cs">
-      <DependentUpon>Form_Loading.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,14 +159,8 @@
     <Compile Include="Stagiaire.cs">
       <DependentUpon>FaceRecoDbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="stagiaireEncod.cs">
-      <DependentUpon>FaceRecoDbContext.tt</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form_FaceReco.resx">
       <DependentUpon>Form_FaceReco.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Loading.resx">
-      <DependentUpon>Form_Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Menu.resx">
       <DependentUpon>Form_Menu.cs</DependentUpon>

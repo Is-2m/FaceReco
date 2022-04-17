@@ -24,35 +24,39 @@ using Emgu.CV.Util;
 using Microsoft.Win32;
 using System.Drawing.Drawing2D;
 
+
 namespace FaceReco
 {
     public partial class Form_FaceReco : Form
     {
+        #region Variables 
         Graphics graph;
+        int frm = 0;
         int currentHour = DateTime.Now.Hour;
         public List<presenceHistory> tempPresenceHistories = new List<presenceHistory>();
         FaceRecognition fr = Program.fr;
         List<FaceEncoding> lstEncods = Program.lstEncods;
         private VideoCapture videoCapture;
         readonly CascadeClassifier cascadeClassifier = new CascadeClassifier(Path.Combine(Environment.CurrentDirectory, @"haarcascade_frontalface_alt_tree.xml"));
+        #endregion
+
         public Form_FaceReco()
         {
 
             InitializeComponent();
         }
 
+        #region Events
         private void Form_FaceReco_Load(object sender, EventArgs e)
         {
+            Program.loadEncodings();
+            lstEncods = Program.lstEncods;
             loadTempPresence();
-            if (videoCapture == null)
-            {
-                videoCapture = new VideoCapture(0);
-            }
         }
-        int frm = 0;
 
         private void btn_Detect_Click(object sender, EventArgs e)
         {
+            videoCapture = new VideoCapture(0);
             videoCapture.ImageGrabbed += VideoCapture_ImageGrabbed;
             videoCapture.Start();
         }
@@ -65,7 +69,8 @@ namespace FaceReco
 
             byte[] bytes = m.ToImage<Bgr, byte>().ToJpegData();
             Bitmap bp = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
-            var rects = cascadeClassifier.DetectMultiScale(m, 1.1, 3, Size.Empty, Size.Empty);
+            //var rects = cascadeClassifier.DetectMultiScale(m, 1.1, 3, Size.Empty, Size.Empty);
+            var rects = cascadeClassifier.DetectMultiScale(m, 1.1, 4);
             Pen p = new Pen(Color.Green, 3);
             graph = Graphics.FromImage(bp);
             foreach (var rect in rects)
@@ -76,15 +81,13 @@ namespace FaceReco
             var bp2 = new Bitmap(bp, bp.Width / 4, bp.Height / 4);
 
             frm++;
-            if (frm == 5)
+            if (frm == 10)
             {
                 frm = 0;
-                new Task(() => { NewMeth(bp2); }).Start();
-                //NewMeth(bp2);
+                new Task(() => { FaceChecking(bp2, bp); }).Start();
 
             }
 
-            //newMeth(bp2);
             pb_live.Image = bp;
 
             //}
@@ -96,19 +99,13 @@ namespace FaceReco
         {
             pushTempPresenceHistoriesToDB();
         }
-        private void NewMeth(Bitmap bp)
+        private void FaceChecking(Bitmap bp, Bitmap OrgBp)
         {
 
             var img = FaceRecognition.LoadImage(bp);
             var loc = fr.FaceLocations(img);
             if (loc.Count() != 0)
             {
-                //MessageBox.Show("FaceDetected");
-                //foreach (var l in loc)
-                //{
-
-                //    graph.DrawRectangle(Pens.Green, l.Left * 4, l.Top * 4, (l.Right - l.Left) * 4, (l.Bottom - l.Top) * 4);
-                //}
                 IEnumerable<FaceEncoding> encd = fr.FaceEncodings(img, loc);
                 const double tolerance = 0.5d;
                 bool isFound = false;
@@ -119,60 +116,64 @@ namespace FaceReco
                     {
                         if (FaceRecognition.CompareFace(encd.ElementAt(j), lstEncods[i], tolerance))
                         {
-                            //MessageBox.Show("FaceKnowen");
-                            //graph.DrawString(Path.GetFileName(lstImgs[i]), new Font("Tahoma", 20), Brushes.Black, new System.Drawing.Point(loc.ElementAt(j).Left * 4 + 2, loc.ElementAt(j).Top * 4 - 35));
                             isFound = true;
                             var s = String.Join(",", lstEncods[i].GetRawEncoding());
-                            //new Task(() => { addToPresenceHistory(s); }).Start();
-                            addToPresenceHistory(s);
-
+                            addToPresenceHistory(isFound, s, faceEncod: encd.First());
                             break;
-
                         }
-
                     }
-
-
                 }
-
-                //SwitchMode(isFound);
-                //new Task(() => { SwitchMode(isFound); }).Start();
-
-
-
-                kda(isFound);
-
-
+                switchPanels(isFound);
                 if (!isFound)
                 {
                     try
                     {
-                        //String pth = Application.StartupPath + $@"\unknowen Images\";
-                        //MessageBox.Show(pth);
-                        //pb_live.Image.Sa
-                        //File.Move(Path.Combine(Directory.GetCurrentDirectory(),fileName), Path.Combine(Directory.GetCurrentDirectory(), $@"\unknowen Images\", fileName) );
                         var d = DateTime.Now;
-                        addToPresenceHistory("");
                         String fileName = $"Inconnu {d.Year}{d.Month}{d.Day}{d.Hour}{d.Minute}{d.Second}{d.Millisecond}.png";
+                        addToPresenceHistory(isFound, String.Join(",", encd.First().GetRawEncoding()), d, fileName.Replace(".png", ""), encd.First());
+
+                        Stagiaire s = new Stagiaire();
+                        var entity = new presenceHistory();
+                        s.CEF = fileName.Replace(".png", "");
+                        s.stringEncod = String.Join(",", encd.First().GetRawEncoding());
+                        s.nom = "inconnu";
+                        s.prenom = "inconnu";
+                        Program.loadEncodings();
+
                         Directory.CreateDirectory(Application.StartupPath + $@"\unknowen Images\");
-                        bp.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);
+                        OrgBp.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);
                         File.Move(Application.StartupPath + $@"\{fileName}", Application.StartupPath + $@"\unknowen Images\" + fileName);
                     }
                     catch (Exception ex)
                     { }
                 }
-
-
-
-
-                //FaceRe(bp);
             }
-            //else
-            //{
-            //    SwitchMode();
-            //}
         }
-        void addToPresenceHistory(string strEncod)
+        private void btn_stop_Click(object sender, EventArgs e)
+        {
+            stop();
+        }
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            if (videoCapture.IsOpened && btn_pause.Text == "&Pause")
+            {
+                videoCapture.Pause();
+                btn_pause.Text = "&Start";
+            }
+            else if (videoCapture.IsOpened && btn_pause.Text == "&Start")
+            {
+                btn_pause.Text = "&Pause";
+                videoCapture.Start();
+            }
+        }
+        private void btn_Exit_Click(object sender, EventArgs e)
+        {
+            stop();
+            this.Close();
+        }
+        #endregion
+        #region Methods
+        void addToPresenceHistory(bool isFound, string strEncod, DateTime? dt = null, string cef = "", FaceEncoding faceEncod = null)
         {
             try
             {
@@ -182,106 +183,56 @@ namespace FaceReco
                     currentHour = DateTime.Now.Hour;
                     tempPresenceHistories = new List<presenceHistory>();
                 }
-                if (strEncod == "")
+                if (!isFound)
                 {
-                    var entity = new presenceHistory();
-                    entity.dateHistory = DateTime.Now;
-                    entity.cef = "";
+                    var result = FaceRecognition.CompareFaces(lstEncods.AsEnumerable(), faceEncod, 0.5d);
+
+                    if (result.ToList().IndexOf(true) == -1)
+                    {
+                        MessageBox.Show("im there");
+                        Program.dc.Stagiaires.Add(s);
+                        Program.dc.SaveChanges();
+
+                        entity.dateHistory = dt.Value;
+                        entity.cef = strEncod;
+
+                        tempPresenceHistories.Add(entity);
+
+                    }
                 }
                 else
                 {
-                    var encod = Program.dc.stagiaireEncods.First(obj => obj.stringEncod == strEncod);
+                    var Stgr = Program.dc.Stagiaires.First(obj => obj.stringEncod == strEncod);
                     var entity = new presenceHistory();
                     entity.dateHistory = DateTime.Now;
-                    entity.cef = encod.cef;
-                    entity.Stagiaire = encod.Stagiaire;
+                    entity.cef = Stgr.CEF;
+                    entity.Stagiaire = Stgr;
                     if (!tempPresenceHistories.Any(e => e.cef == entity.cef))
                     {
                         tempPresenceHistories.Add(entity);
                     }
                 }
-
             }
             catch (Exception)
             { }
-
-
-
-
         }
-        void kda(bool isFound)
+        void switchPanels(bool isFound)
         {
-            pan_red.Visible = !isFound;
-            //pan_red.Enabled = !isFound;
-            pan_green.Visible = isFound;
+            pan_red.Invoke((MethodInvoker)(() => pan_red.Visible = !isFound));
+            pan_green.Invoke((MethodInvoker)(() => pan_green.Visible = isFound));
         }
         public void pushTempPresenceHistoriesToDB()
         {
-
             Program.dc.presenceHistories.AddRange(tempPresenceHistories);
             Program.dc.SaveChanges();
-        }
-
-
-        delegate void SetTextCallback(bool b);
-
-        private void SwitchMode(bool b)
-        {
-            MessageBox.Show("inside");
-            if (this.pan_green.InvokeRequired)
-            {
-                MessageBox.Show("in if");
-                SetTextCallback d = new SetTextCallback(SwitchMode);
-                this.Invoke(d, new object[] { b });
-            }
-            else
-            {
-                MessageBox.Show("in else");
-                this.pan_red.Visible = !b;
-                this.pan_green.Visible = b;
-
-            }
-        }
-        //private void SwitchMode(int a)
-        //{
-        //    if (this.pan_green.InvokeRequired)
-        //    {
-        //        SetTextCallback d = new SetTextCallback(SwitchMode);
-        //        this.Invoke(d, new object[] { a });
-        //    }
-        //    else
-        //    {
-        //        this.pan_red.Visible = true;
-        //        this.pan_green.Visible = true;
-
-        //    }
-        //}
-
-        private void btn_stop_Click(object sender, EventArgs e)
-        {
-            stop();
         }
         void stop()
         {
             videoCapture.Dispose();
-
             pb_live.Image = null;
-            pan_red.Visible = false;
-            pan_green.Visible = false;
+            pan_red.Invoke((MethodInvoker)(() => pan_red.Visible = false));
+            pan_green.Invoke((MethodInvoker)(() => pan_green.Visible = false));
         }
-        private void btn_pause_Click(object sender, EventArgs e)
-        {
-            if (btn_pause.Text == "&Pause")
-            {
-                videoCapture.Pause();
-                btn_pause.Text = "&Start";
-            }
-            else
-            {
-                videoCapture.Start();
-            }
-        }
-
         void loadTempPresence()
         {
             if (Program.dc.presenceHistories.Count() != 0)
@@ -303,12 +254,9 @@ namespace FaceReco
                 tempPresenceHistories = new List<presenceHistory>();
             }
         }
+        #endregion
 
-        private void btn_Exit_Click(object sender, EventArgs e)
-        {
-            stop();
-            this.Close();
-        }
+
 
     }
 }

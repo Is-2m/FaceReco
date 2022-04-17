@@ -113,7 +113,6 @@ namespace FaceReco
                 var stgr = Program.dc.Stagiaires.First(obj => obj.CEF == cef);
                 Program.dc.Stagiaires.Remove(stgr);
                 dgv_stgr.Rows.RemoveAt(pos);
-                //Program.dc.SubmitChanges();
             }
         }
 

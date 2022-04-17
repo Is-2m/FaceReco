@@ -5,15 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="71bd70a9779d4ea0b8b6d8e47d1e043e" Name="Diagram1">
-        <EntityTypeShape EntityType="FaceRecModel.Filier" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.Groupe" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.presenceHistory" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.Stagiaire" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.stagiaireEncod" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
-        <AssociationConnector Association="FaceRecModel.FK_Groupe" ManuallyRouted="false" />
-        <AssociationConnector Association="FaceRecModel.FK_Stagiaire" ManuallyRouted="false" />
-        <AssociationConnector Association="FaceRecModel.FK__presenceHis__cef__498EEC8D" ManuallyRouted="false" />
-        <AssociationConnector Association="FaceRecModel.FK__stagiaireEn__cef__29221CFB" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FaceRecModel.Filier" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="FaceRecModel.Groupe" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="FaceRecModel.presenceHistory" Width="1.5" PointX="7.5" PointY="1.5" />
+        <EntityTypeShape EntityType="FaceRecModel.Stagiaire" Width="1.5" PointX="5.25" PointY="1" />
+        <AssociationConnector Association="FaceRecModel.FK_Groupe" />
+        <AssociationConnector Association="FaceRecModel.FK_Stagiaire" />
+        <AssociationConnector Association="FaceRecModel.FK__presenceHis__cef__0880433F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

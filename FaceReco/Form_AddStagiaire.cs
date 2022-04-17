@@ -26,35 +26,32 @@ namespace FaceReco
         Stagiaire Stgr;
         public Form_AddStagiaire(Stagiaire stgr)
         {
-
             Stgr = stgr;
             InitializeComponent();
         }
 
         private void btn_Exit_Click(object sender, EventArgs e)
         {
-
             videoCapture.Dispose();
             this.Close();
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 if (Stgr == null)
                     Create();
                 else
                     Modify();
                 Program.loadEncodings();
-            //}
-            //catch (Exception ex)
-            //{
+            }
+            catch (Exception ex)
+            {
 
-            //    MessageBox.Show(ex.Message, "L'ajoute d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                MessageBox.Show(ex.Message, "L'ajoute d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             videoCapture.Dispose();
-
             this.Close();
         }
         bool CheckExistence()
@@ -75,7 +72,6 @@ namespace FaceReco
 
         private void Form_AddStagiaire_Load(object sender, EventArgs e)
         {
-
             videoCapture = new VideoCapture(0);
             cbFilLoad();
             if (Stgr != null)
@@ -97,31 +93,23 @@ namespace FaceReco
                 cb_Grp.Items.Add(g.numG);
             }
             cb_Grp.SelectedIndex = f.Groupes.Count == 0 ? -1 : 0;
-
         }
         void Create()
         {
-
-            //var cef = Convert.ToInt32(this.txt_CEF.Text);
             if (!CheckExistence())
             {
                 var selectedFiliere = Program.dc.Filiers.First(obj => obj.nomF == cb_Fil.SelectedItem.ToString());
                 var selectedGroupe = selectedFiliere.Groupes.First(obj => obj.numG == int.Parse(cb_Grp.SelectedItem.ToString()));
                 Stagiaire s = new Stagiaire();
-                stagiaireEncod fe = new stagiaireEncod();
-                //var cef = Convert.ToInt64(txt_CEF.Text);
                 s.CEF = txt_CEF.Text;
                 s.cin = txt_Cin.Text;
                 s.nom = txt_Nom.Text;
+                s.stringEncod = encode;
                 s.prenom = txt_Prenom.Text;
                 s.idG = selectedGroupe.idG;
                 s.ville = txt_ville.Text;
                 s.adresse = txt_addresse.Text;
-                fe.cef = s.CEF;
-                fe.stringEncod = encode;
-                fe.Stagiaire = s;
                 Program.dc.Stagiaires.Add(s);
-                Program.dc.stagiaireEncods.Add(fe);
                 Program.dc.SaveChanges();
                 MessageBox.Show("Ajouter avec Succès", "L'ajoute d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -141,24 +129,7 @@ namespace FaceReco
             Stgr.idG = selectedGroupe.idG;
             Stgr.ville = txt_ville.Text;
             Stgr.adresse = txt_addresse.Text;
-            if (encode != "")
-            {
-                try
-                {
-                    var sE = Program.dc.stagiaireEncods.First(obj => obj.cef == Stgr.CEF);
-                    sE.stringEncod = encode;
-
-
-                }
-                catch (Exception)
-                {
-                    stagiaireEncod fe = new stagiaireEncod();
-                    fe.cef = Stgr.CEF;
-                    fe.stringEncod = encode;
-                    fe.Stagiaire = Stgr;
-                    Program.dc.stagiaireEncods.Add(fe);
-                }
-            }
+            Stgr.stringEncod = encode != "" ? encode : Stgr.stringEncod;
             Program.dc.SaveChanges();
             MessageBox.Show("Edité avec succès", "L'édition d'un Stagiaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -179,7 +150,6 @@ namespace FaceReco
         private void btn_capture_Click(object sender, EventArgs e)
         {
             btn_pause.Enabled = true;
-
             videoCapture.ImageGrabbed += VideoCapture_ImageGrabbed;
             videoCapture.Start();
 
@@ -228,7 +198,6 @@ namespace FaceReco
             ofd.Filter = "JPEG Files|*.jpg;*.jpeg;*.png|BMP Files |*.BMP;";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                //MessageBox.Show(ofd.FileName);
                 bp = new Bitmap(ofd.FileName);
                 pb_live.Image = bp;
                 pb_live.SizeMode = PictureBoxSizeMode.StretchImage;
