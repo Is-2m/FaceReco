@@ -28,7 +28,7 @@ namespace FaceReco
         public virtual DbSet<Filiere> Filieres { get; set; }
         public virtual DbSet<Groupe> Groupes { get; set; }
         public virtual DbSet<Intruder> Intruders { get; set; }
-        public virtual DbSet<Stagiaire> Stagiaires { get; set; }
         public virtual DbSet<presenceHistory> presenceHistories { get; set; }
+        public virtual DbSet<Stagiaire> Stagiaires { get; set; }
     }
 }

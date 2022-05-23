@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1b305bb6adc64ec3a70e5a6b708968e5" Name="Diagram1">
-        <EntityTypeShape EntityType="FaceRecModel.Filiere" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.Groupe" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.Intruder" Width="1.5" PointX="3.625" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.Stagiaire" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaceRecModel.presenceHistory" Width="1.5" PointX="7.875" PointY="1.875" IsExpanded="true" />
-        <AssociationConnector Association="FaceRecModel.FK__Groupe__idF__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="FaceRecModel.FK__Stagiaire__idG__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="FaceRecModel.FK__presenceH__idInt__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="FaceRecModel.FK__presenceHis__cef__3F466844" ManuallyRouted="false" />
+      <Diagram DiagramId="9646bd83f2984839b8375fe64a198f67" Name="Diagram1">
+        <EntityTypeShape EntityType="FaceRecModel.Filiere" Width="1.5" PointX="2.875" PointY="2.5" />
+        <EntityTypeShape EntityType="FaceRecModel.Groupe" Width="1.5" PointX="5.125" PointY="2.5" />
+        <EntityTypeShape EntityType="FaceRecModel.Intruder" Width="1.5" PointX="2.625" PointY="4.875" />
+        <EntityTypeShape EntityType="FaceRecModel.presenceHistory" Width="1.5" PointX="5.125" PointY="5" />
+        <EntityTypeShape EntityType="FaceRecModel.Stagiaire" Width="1.5" PointX="7.25" PointY="3.25" />
+        <AssociationConnector Association="FaceRecModel.FK__Groupe__idF__38996AB5" />
+        <AssociationConnector Association="FaceRecModel.FK__Stagiaire__idG__3B75D760" />
+        <AssociationConnector Association="FaceRecModel.FK__presenceH__idInt__70DDC3D8" />
+        <AssociationConnector Association="FaceRecModel.FK__presenceHis__cef__6FE99F9F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

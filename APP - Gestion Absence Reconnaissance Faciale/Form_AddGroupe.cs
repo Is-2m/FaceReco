@@ -73,7 +73,7 @@ namespace FaceReco
             {
                 var f = Program.dc.Filieres.First(obj => obj.nomF.ToUpper() == cb_Fil.SelectedItem.ToString().ToUpper());
                 var lastGroupe = Program.dc.Groupes.OrderByDescending(obj => obj.idG).FirstOrDefault();
-                int lastGivenId = lastGroupe == null ? 1 : lastGroupe.idG;
+                int lastGivenId = lastGroupe == null ? 0 : lastGroupe.idG;
                 Groupe g = new Groupe();
                 g.idG = ++lastGivenId;
                 g.numG = txt_NumG.Text;

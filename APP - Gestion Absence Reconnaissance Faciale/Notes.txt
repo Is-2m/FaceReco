@@ -1,0 +1,11 @@
+﻿What's Done For Now:
+	1- Deticting a face and see if it belong to a trainee or an intruder.
+	2- If niether a new intruder object will be made.
+	3- Intruder have records in the presence history as well.
+
+What's Should Be Done:
+	1- Making the buttons of presence history and the Trainees expandable so I can chosse which one of them i wanna monitor.
+	2- Add new form to list all the intruders, and add a hyperlink in thier infos linked to thier photos so I can see them.
+	3- Make a seperate presence history to monitor the intruders and the presence and the absence as well.
+	4- (just a new thought on a whim) after transfering an intruder into a trainee let him have a place in intruders' presence sheet so you can see his history and kda.
+		4-1 that's mean should not delete the intruder row from the database, it might be tricky. 

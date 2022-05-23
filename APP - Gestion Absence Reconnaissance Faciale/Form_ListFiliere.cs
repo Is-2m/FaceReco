@@ -20,7 +20,7 @@ namespace FaceReco
         private void Form_ListFiliere_Load(object sender, EventArgs e)
         {
             LoadTheme();
-            
+
             Fil_Refresh();
         }
         void LoadTheme()
@@ -33,11 +33,12 @@ namespace FaceReco
                     btn.BackColor = ThemeColor.PrimaryColor;
                     btn.ForeColor = Color.White;
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-                }if(ctrl.GetType() == typeof(Label))
+                }
+                if (ctrl.GetType() == typeof(Label))
                 {
                     Label lbl = (Label)ctrl;
                     lbl.ForeColor = ThemeColor.SecondaryColor;
-                    lbl.Font = new Font("Poppins SemiBold",lbl.Font.Size);
+                    lbl.Font = new Font("Poppins SemiBold", lbl.Font.Size);
                 }
                 if (ctrl.GetType() == typeof(GroupBox))
                 {
@@ -69,15 +70,19 @@ namespace FaceReco
         {
             dgv_Grp.Rows.Clear();
 
-            int i = dgv_Fil.CurrentCell.RowIndex;
-            string title = (string)dgv_Fil.Rows[i].Cells[0].Value;
-            var flr = Program.dc.Filieres.FirstOrDefault(obj => obj.nomF == title);
-            if (flr != null)
+            int i = dgv_Fil.CurrentCell == null ? -1 : dgv_Fil.CurrentCell.RowIndex;
+            if (i != -1)
             {
-                foreach (var g in flr.Groupes)
+                string title = (string)dgv_Fil.Rows[i].Cells[0].Value;
+                var flr = Program.dc.Filieres.FirstOrDefault(obj => obj.nomF == title);
+                if (flr != null)
                 {
-                    dgv_Grp.Rows.Add(title + " " + g.numG, g.Stagiaires.Count);
+                    foreach (var g in flr.Groupes)
+                    {
+                        dgv_Grp.Rows.Add(title + " " + g.numG, g.Stagiaires.Count);
+                    }
                 }
+
             }
 
 
@@ -117,7 +122,7 @@ namespace FaceReco
                 var fil = Program.dc.Filieres.First(obj => obj.nomF == nomF);
                 Program.dc.Filieres.Remove(fil);
                 dgv_Fil.Rows.RemoveAt(pos);
-                //Program.dc.SubmitChanges();
+                Program.dc.SaveChanges();
             }
         }
 

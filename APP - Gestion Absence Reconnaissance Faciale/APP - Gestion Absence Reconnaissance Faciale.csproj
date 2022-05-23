@@ -334,6 +334,7 @@
       <DependentUpon>FaceRec.edmx</DependentUpon>
       <LastGenOutput>FaceRec.cs</LastGenOutput>
     </Content>
+    <Content Include="Notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

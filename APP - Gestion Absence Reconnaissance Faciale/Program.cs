@@ -44,6 +44,17 @@ namespace FaceReco
                     }
                 }
             }
+            if (dc.Intruders.Count() != 0)
+            {
+                foreach (var s in dc.Intruders)
+                {
+                    if (s.stringEncod != null)
+                    {
+                        var doubleEncod = Array.ConvertAll(s.stringEncod.Split(','), Double.Parse);
+                        lstEncods.Add(FaceRecognition.LoadFaceEncoding(doubleEncod));
+                    }
+                }
+            }
         }
     }
 }

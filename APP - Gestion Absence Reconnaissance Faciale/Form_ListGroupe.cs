@@ -61,7 +61,7 @@ namespace FaceReco
             dgv_Grp.Rows.Clear();
             foreach (var g in Program.dc.Groupes)
             {
-                dgv_Grp.Rows.Add(g.Filiere.nomF + " " + g.numG, g.Stagiaires.Count,g.idG);
+                dgv_Grp.Rows.Add(g.Filiere != null ? g.Filiere.nomF : "" + " " + g.numG, g.Stagiaires.Count, g.idG);
             }
         }
 
@@ -167,7 +167,7 @@ namespace FaceReco
             int grpNum = int.Parse(dgv_Grp.Rows[pos].Cells[2].Value.ToString());
             string nomF = dgv_Grp.Rows[pos].Cells[0].Value.ToString();
             string[] name = nomF.Split(' ');
-            var grp = Program.dc.Groupes.First(obj => obj.idG ==grpNum);
+            var grp = Program.dc.Groupes.First(obj => obj.idG == grpNum);
             var f = new Form_AddGroupe(grp);
             f.ShowDialog();
 

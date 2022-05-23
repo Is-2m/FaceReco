@@ -72,7 +72,7 @@ namespace FaceReco
             dgv_stgr.Rows.Clear();
             foreach (var s in Program.dc.Stagiaires)
             {
-                dgv_stgr.Rows.Add(s.CEF, s.cin, s.nom, s.prenom, s.Groupe == null ? "null" : s.Groupe.Filiere.nomF, s.Groupe == null ? "null" : s.Groupe.numG.ToString(), s.ville, s.adresse);
+                dgv_stgr.Rows.Add(s.CEF, s.cin, s.nom, s.prenom,  s.Groupe == null || s.Groupe.Filiere == null  ? "null" : s.Groupe.Filiere.nomF, s.Groupe == null ? "null" : s.Groupe.numG.ToString(), s.ville, s.adresse);
             }
         }
         private void btn_Close_Click(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace FaceReco
                     selectedImages.Add(Path.GetFileNameWithoutExtension(item));
 
                 }
-                if(MessageBox.Show("voulez-vous vraiment supprimer les stagiaires sélectionnés", "suppression des doublons", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("voulez-vous vraiment supprimer les stagiaires sélectionnés", "suppression des doublons", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     foreach (var s in selectedImages)
                     {

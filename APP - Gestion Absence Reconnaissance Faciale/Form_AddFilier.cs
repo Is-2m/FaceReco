@@ -53,7 +53,7 @@ namespace FaceReco
             if (!CheckExistence())
             {
                 var lastFilier = Program.dc.Filieres.OrderByDescending(obj => obj.idF).FirstOrDefault();
-                int lastGivenId = lastFilier == null ? 1 : lastFilier.idF;
+                int lastGivenId = lastFilier == null ? 0 : lastFilier.idF;
                 Filiere f = Program.dc.Filieres.Create();
 
                 f.idF = lastGivenId + 1;

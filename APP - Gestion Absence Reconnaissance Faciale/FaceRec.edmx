@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FaceRecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FaceRecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Filiere">
           <Key>
             <PropertyRef Name="idF" />
@@ -28,8 +28,6 @@
           <Property Name="idIntr" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="stringEncod" Type="varchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="presenceHistory">
           <Key>
             <PropertyRef Name="id" />
@@ -53,7 +51,9 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
           <Property Name="stringEncod" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK__Groupe__idF__38996AB5">
-          <End Role="Filiere" Type="Self.Filiere" Multiplicity="0..1" />
+          <End Role="Filiere" Type="Self.Filiere" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Filiere">
@@ -64,7 +64,7 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__presenceH__idInt__403A8C7D">
+        <Association Name="FK__presenceH__idInt__70DDC3D8">
           <End Role="Intruder" Type="Self.Intruder" Multiplicity="0..1" />
           <End Role="presenceHistory" Type="Self.presenceHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -76,7 +76,7 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__presenceHis__cef__3F466844">
+        <Association Name="FK__presenceHis__cef__6FE99F9F">
           <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="0..1" />
           <End Role="presenceHistory" Type="Self.presenceHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -104,24 +104,17 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
           <EntitySet Name="Filiere" EntityType="Self.Filiere" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groupe" EntityType="Self.Groupe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Intruder" EntityType="Self.Intruder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="presenceHistory" EntityType="Self.presenceHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stagiaire" EntityType="Self.Stagiaire" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="presenceHistory" EntityType="Self.presenceHistory" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [presenceHistory].[id] AS [id], 
-    [presenceHistory].[cef] AS [cef], 
-    [presenceHistory].[idIntr] AS [idIntr], 
-    [presenceHistory].[dateHistory] AS [dateHistory]
-    FROM [dbo].[presenceHistory] AS [presenceHistory]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Groupe__idF__38996AB5" Association="Self.FK__Groupe__idF__38996AB5">
             <End Role="Filiere" EntitySet="Filiere" />
             <End Role="Groupe" EntitySet="Groupe" />
           </AssociationSet>
-          <AssociationSet Name="FK__presenceH__idInt__403A8C7D" Association="Self.FK__presenceH__idInt__403A8C7D">
+          <AssociationSet Name="FK__presenceH__idInt__70DDC3D8" Association="Self.FK__presenceH__idInt__70DDC3D8">
             <End Role="Intruder" EntitySet="Intruder" />
             <End Role="presenceHistory" EntitySet="presenceHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__presenceHis__cef__3F466844" Association="Self.FK__presenceHis__cef__3F466844">
+          <AssociationSet Name="FK__presenceHis__cef__6FE99F9F" Association="Self.FK__presenceHis__cef__6FE99F9F">
             <End Role="Stagiaire" EntitySet="Stagiaire" />
             <End Role="presenceHistory" EntitySet="presenceHistory" />
           </AssociationSet>
@@ -130,11 +123,33 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
             <End Role="Stagiaire" EntitySet="Stagiaire" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FaceRecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FaceRecEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Filieres" EntityType="FaceRecModel.Filiere" />
+          <EntitySet Name="Groupes" EntityType="FaceRecModel.Groupe" />
+          <EntitySet Name="Intruders" EntityType="FaceRecModel.Intruder" />
+          <EntitySet Name="presenceHistories" EntityType="FaceRecModel.presenceHistory" />
+          <EntitySet Name="Stagiaires" EntityType="FaceRecModel.Stagiaire" />
+          <AssociationSet Name="FK__Groupe__idF__38996AB5" Association="FaceRecModel.FK__Groupe__idF__38996AB5">
+            <End Role="Filiere" EntitySet="Filieres" />
+            <End Role="Groupe" EntitySet="Groupes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stagiaire__idG__3B75D760" Association="FaceRecModel.FK__Stagiaire__idG__3B75D760">
+            <End Role="Groupe" EntitySet="Groupes" />
+            <End Role="Stagiaire" EntitySet="Stagiaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK__presenceH__idInt__70DDC3D8" Association="FaceRecModel.FK__presenceH__idInt__70DDC3D8">
+            <End Role="Intruder" EntitySet="Intruders" />
+            <End Role="presenceHistory" EntitySet="presenceHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__presenceHis__cef__6FE99F9F" Association="FaceRecModel.FK__presenceHis__cef__6FE99F9F">
+            <End Role="Stagiaire" EntitySet="Stagiaires" />
+            <End Role="presenceHistory" EntitySet="presenceHistories" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Filiere">
           <Key>
             <PropertyRef Name="idF" />
@@ -142,40 +157,25 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
           <Property Name="idF" Type="Int32" Nullable="false" />
           <Property Name="nomF" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="intitule" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Groupes" Relationship="Self.FK__Groupe__idF__38996AB5" FromRole="Filiere" ToRole="Groupe" />
+          <NavigationProperty Name="Groupes" Relationship="FaceRecModel.FK__Groupe__idF__38996AB5" FromRole="Filiere" ToRole="Groupe" />
         </EntityType>
         <EntityType Name="Groupe">
           <Key>
             <PropertyRef Name="idG" />
           </Key>
           <Property Name="idG" Type="Int32" Nullable="false" />
-          <Property Name="numG" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numG" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="idF" Type="Int32" />
-          <NavigationProperty Name="Filiere" Relationship="Self.FK__Groupe__idF__38996AB5" FromRole="Groupe" ToRole="Filiere" />
-          <NavigationProperty Name="Stagiaires" Relationship="Self.FK__Stagiaire__idG__3B75D760" FromRole="Groupe" ToRole="Stagiaire" />
+          <NavigationProperty Name="Filiere" Relationship="FaceRecModel.FK__Groupe__idF__38996AB5" FromRole="Groupe" ToRole="Filiere" />
+          <NavigationProperty Name="Stagiaires" Relationship="FaceRecModel.FK__Stagiaire__idG__3B75D760" FromRole="Groupe" ToRole="Stagiaire" />
         </EntityType>
         <EntityType Name="Intruder">
           <Key>
             <PropertyRef Name="idIntr" />
           </Key>
-          <Property Name="idIntr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idIntr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="stringEncod" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="presenceHistories" Relationship="Self.FK__presenceH__idInt__403A8C7D" FromRole="Intruder" ToRole="presenceHistory" />
-        </EntityType>
-        <EntityType Name="Stagiaire">
-          <Key>
-            <PropertyRef Name="CEF" />
-          </Key>
-          <Property Name="CEF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ville" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="adresse" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="idG" Type="Int32" />
-          <Property Name="stringEncod" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Groupe" Relationship="Self.FK__Stagiaire__idG__3B75D760" FromRole="Stagiaire" ToRole="Groupe" />
-          <NavigationProperty Name="presenceHistories" Relationship="Self.FK__presenceHis__cef__3F466844" FromRole="Stagiaire" ToRole="presenceHistory" />
+          <NavigationProperty Name="presenceHistories" Relationship="FaceRecModel.FK__presenceH__idInt__70DDC3D8" FromRole="Intruder" ToRole="presenceHistory" />
         </EntityType>
         <EntityType Name="presenceHistory">
           <Key>
@@ -185,12 +185,29 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
           <Property Name="cef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idIntr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dateHistory" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Intruder" Relationship="Self.FK__presenceH__idInt__403A8C7D" FromRole="presenceHistory" ToRole="Intruder" />
-          <NavigationProperty Name="Stagiaire" Relationship="Self.FK__presenceHis__cef__3F466844" FromRole="presenceHistory" ToRole="Stagiaire" />
+          <NavigationProperty Name="Intruder" Relationship="FaceRecModel.FK__presenceH__idInt__70DDC3D8" FromRole="presenceHistory" ToRole="Intruder" />
+          <NavigationProperty Name="Stagiaire" Relationship="FaceRecModel.FK__presenceHis__cef__6FE99F9F" FromRole="presenceHistory" ToRole="Stagiaire" />
+        </EntityType>
+        <EntityType Name="Stagiaire">
+          <Key>
+            <PropertyRef Name="CEF" />
+          </Key>
+          <Property Name="CEF" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ville" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="adresse" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="idG" Type="Int32" />
+          <Property Name="stringEncod" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Groupe" Relationship="FaceRecModel.FK__Stagiaire__idG__3B75D760" FromRole="Stagiaire" ToRole="Groupe" />
+          <NavigationProperty Name="presenceHistories" Relationship="FaceRecModel.FK__presenceHis__cef__6FE99F9F" FromRole="Stagiaire" ToRole="presenceHistory" />
         </EntityType>
         <Association Name="FK__Groupe__idF__38996AB5">
-          <End Role="Filiere" Type="Self.Filiere" Multiplicity="0..1" />
-          <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
+          <End Type="FaceRecModel.Filiere" Role="Filiere" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FaceRecModel.Groupe" Role="Groupe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Filiere">
               <PropertyRef Name="idF" />
@@ -201,8 +218,8 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Stagiaire__idG__3B75D760">
-          <End Role="Groupe" Type="Self.Groupe" Multiplicity="0..1" />
-          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="*" />
+          <End Type="FaceRecModel.Groupe" Role="Groupe" Multiplicity="0..1" />
+          <End Type="FaceRecModel.Stagiaire" Role="Stagiaire" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Groupe">
               <PropertyRef Name="idG" />
@@ -212,9 +229,9 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__presenceH__idInt__403A8C7D">
-          <End Role="Intruder" Type="Self.Intruder" Multiplicity="0..1" />
-          <End Role="presenceHistory" Type="Self.presenceHistory" Multiplicity="*" />
+        <Association Name="FK__presenceH__idInt__70DDC3D8">
+          <End Type="FaceRecModel.Intruder" Role="Intruder" Multiplicity="0..1" />
+          <End Type="FaceRecModel.presenceHistory" Role="presenceHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Intruder">
               <PropertyRef Name="idIntr" />
@@ -224,9 +241,9 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__presenceHis__cef__3F466844">
-          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="0..1" />
-          <End Role="presenceHistory" Type="Self.presenceHistory" Multiplicity="*" />
+        <Association Name="FK__presenceHis__cef__6FE99F9F">
+          <End Type="FaceRecModel.Stagiaire" Role="Stagiaire" Multiplicity="0..1" />
+          <End Type="FaceRecModel.presenceHistory" Role="presenceHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stagiaire">
               <PropertyRef Name="CEF" />
@@ -236,30 +253,7 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FaceRecEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Filieres" EntityType="Self.Filiere" />
-          <EntitySet Name="Groupes" EntityType="Self.Groupe" />
-          <EntitySet Name="Intruders" EntityType="Self.Intruder" />
-          <EntitySet Name="Stagiaires" EntityType="Self.Stagiaire" />
-          <EntitySet Name="presenceHistories" EntityType="Self.presenceHistory" />
-          <AssociationSet Name="FK__Groupe__idF__38996AB5" Association="Self.FK__Groupe__idF__38996AB5">
-            <End Role="Filiere" EntitySet="Filieres" />
-            <End Role="Groupe" EntitySet="Groupes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Stagiaire__idG__3B75D760" Association="Self.FK__Stagiaire__idG__3B75D760">
-            <End Role="Groupe" EntitySet="Groupes" />
-            <End Role="Stagiaire" EntitySet="Stagiaires" />
-          </AssociationSet>
-          <AssociationSet Name="FK__presenceH__idInt__403A8C7D" Association="Self.FK__presenceH__idInt__403A8C7D">
-            <End Role="Intruder" EntitySet="Intruders" />
-            <End Role="presenceHistory" EntitySet="presenceHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK__presenceHis__cef__3F466844" Association="Self.FK__presenceHis__cef__3F466844">
-            <End Role="Stagiaire" EntitySet="Stagiaires" />
-            <End Role="presenceHistory" EntitySet="presenceHistories" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -268,50 +262,50 @@ warning 6002: The table/view 'FaceRec.dbo.presenceHistory' does not have a prima
           <EntitySetMapping Name="Filieres">
             <EntityTypeMapping TypeName="FaceRecModel.Filiere">
               <MappingFragment StoreEntitySet="Filiere">
-                <ScalarProperty Name="idF" ColumnName="idF" />
-                <ScalarProperty Name="nomF" ColumnName="nomF" />
                 <ScalarProperty Name="intitule" ColumnName="intitule" />
+                <ScalarProperty Name="nomF" ColumnName="nomF" />
+                <ScalarProperty Name="idF" ColumnName="idF" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Groupes">
             <EntityTypeMapping TypeName="FaceRecModel.Groupe">
               <MappingFragment StoreEntitySet="Groupe">
-                <ScalarProperty Name="idG" ColumnName="idG" />
-                <ScalarProperty Name="numG" ColumnName="numG" />
                 <ScalarProperty Name="idF" ColumnName="idF" />
+                <ScalarProperty Name="numG" ColumnName="numG" />
+                <ScalarProperty Name="idG" ColumnName="idG" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Intruders">
             <EntityTypeMapping TypeName="FaceRecModel.Intruder">
               <MappingFragment StoreEntitySet="Intruder">
+                <ScalarProperty Name="stringEncod" ColumnName="stringEncod" />
                 <ScalarProperty Name="idIntr" ColumnName="idIntr" />
-                <ScalarProperty Name="stringEncod" ColumnName="stringEncod" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Stagiaires">
-            <EntityTypeMapping TypeName="FaceRecModel.Stagiaire">
-              <MappingFragment StoreEntitySet="Stagiaire">
-                <ScalarProperty Name="CEF" ColumnName="CEF" />
-                <ScalarProperty Name="cin" ColumnName="cin" />
-                <ScalarProperty Name="nom" ColumnName="nom" />
-                <ScalarProperty Name="prenom" ColumnName="prenom" />
-                <ScalarProperty Name="ville" ColumnName="ville" />
-                <ScalarProperty Name="adresse" ColumnName="adresse" />
-                <ScalarProperty Name="idG" ColumnName="idG" />
-                <ScalarProperty Name="stringEncod" ColumnName="stringEncod" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="presenceHistories">
             <EntityTypeMapping TypeName="FaceRecModel.presenceHistory">
               <MappingFragment StoreEntitySet="presenceHistory">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="cef" ColumnName="cef" />
-                <ScalarProperty Name="idIntr" ColumnName="idIntr" />
                 <ScalarProperty Name="dateHistory" ColumnName="dateHistory" />
+                <ScalarProperty Name="idIntr" ColumnName="idIntr" />
+                <ScalarProperty Name="cef" ColumnName="cef" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stagiaires">
+            <EntityTypeMapping TypeName="FaceRecModel.Stagiaire">
+              <MappingFragment StoreEntitySet="Stagiaire">
+                <ScalarProperty Name="stringEncod" ColumnName="stringEncod" />
+                <ScalarProperty Name="idG" ColumnName="idG" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="cin" ColumnName="cin" />
+                <ScalarProperty Name="CEF" ColumnName="CEF" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
