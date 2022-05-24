@@ -143,7 +143,7 @@ namespace FaceReco
             this.gb_Stgr.Controls.Add(this.btn_Edit_Stgr);
             this.gb_Stgr.Controls.Add(this.btn_Add_Stgr);
             this.gb_Stgr.Font = new System.Drawing.Font("Poppins", 8.25F);
-            this.gb_Stgr.Location = new System.Drawing.Point(690, 26);
+            this.gb_Stgr.Location = new System.Drawing.Point(690, 59);
             this.gb_Stgr.Name = "gb_Stgr";
             this.gb_Stgr.Size = new System.Drawing.Size(155, 203);
             this.gb_Stgr.TabIndex = 0;

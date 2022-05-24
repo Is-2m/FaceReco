@@ -66,6 +66,9 @@ namespace FaceReco
                     }
                 }
             }
+            //csb.OnBackColor = ThemeColor.PrimaryColor;
+            //csb.OffBackColor= ThemeColor.SecondaryColor;
+
         }
         void dgvLoad()
         {
@@ -152,6 +155,11 @@ namespace FaceReco
         private void Form_ListStagiaire_FormClosing(object sender, FormClosingEventArgs e)
         {
             Program.loadEncodings();
+        }
+
+        private void customSwitchButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

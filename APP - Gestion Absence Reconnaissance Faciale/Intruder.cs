@@ -22,6 +22,7 @@ namespace FaceReco
     
         public string idIntr { get; set; }
         public string stringEncod { get; set; }
+        public bool isUnknown { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<presenceHistory> presenceHistories { get; set; }

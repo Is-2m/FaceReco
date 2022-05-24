@@ -27,6 +27,7 @@
           </Key>
           <Property Name="idIntr" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="stringEncod" Type="varchar(max)" />
+          <Property Name="isUnknown" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="presenceHistory">
           <Key>
@@ -176,6 +177,7 @@
           <Property Name="idIntr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="stringEncod" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="presenceHistories" Relationship="FaceRecModel.FK__presenceH__idInt__70DDC3D8" FromRole="Intruder" ToRole="presenceHistory" />
+          <Property Name="isUnknown" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="presenceHistory">
           <Key>
@@ -280,6 +282,7 @@
           <EntitySetMapping Name="Intruders">
             <EntityTypeMapping TypeName="FaceRecModel.Intruder">
               <MappingFragment StoreEntitySet="Intruder">
+                <ScalarProperty Name="isUnknown" ColumnName="isUnknown" />
                 <ScalarProperty Name="stringEncod" ColumnName="stringEncod" />
                 <ScalarProperty Name="idIntr" ColumnName="idIntr" />
               </MappingFragment>

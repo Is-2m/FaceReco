@@ -41,29 +41,32 @@ namespace FaceReco
 
         private void btn_Filieres_Click(object sender, EventArgs e)
         {
+            HideSubMenu();
             OpenChildForm(new Form_ListFiliere(), sender);
         }
 
         private void btn_Groupe_Click(object sender, EventArgs e)
         {
+            HideSubMenu();
             OpenChildForm(new Form_ListGroupe(), sender);
 
         }
 
         private void btn_Stagiaire_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Form_ListStagiaire(), sender);
-
+            panelSubMenu.Visible = !panelSubMenu.Visible;
         }
 
         private void btn_FaceRec_Click(object sender, EventArgs e)
         {
+            HideSubMenu();
             OpenChildForm(new Form_FaceReco(), sender);
 
         }
 
         private void btn_PresenceSheet_Click(object sender, EventArgs e)
         {
+            HideSubMenu();
             OpenChildForm(new Form_PresenceSheet(), sender);
 
         }
@@ -107,6 +110,21 @@ namespace FaceReco
         }
         #endregion/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         #region Methods
+        void HideSubMenu()
+        {
+            panelSubMenu.Visible = false;
+            this.btn_Stagiaires.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.btn_Stagiaires.Font = new System.Drawing.Font("Poppins Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_Stagiaires.ForeColor = System.Drawing.Color.LightGray;
+            this.btn_Stagiaires.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.btn_Stagiaires.Size = new System.Drawing.Size(220, 40);
+
+            this.btn_Intrus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.btn_Intrus.Font = new System.Drawing.Font("Poppins Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_Intrus.ForeColor = System.Drawing.Color.LightGray;
+            this.btn_Intrus.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.btn_Intrus.Size = new System.Drawing.Size(220, 40);
+        }
         private Color SelectThemeColor()
         {
             int index = random.Next(ThemeColor.ColorList.Count);
@@ -187,6 +205,18 @@ namespace FaceReco
         {
             var f = new Form_LoadFacesToDB();
             f.ShowDialog();
+        }
+
+        private void btn_Stagiaires_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form_ListStagiaire(), btn_Stagiaire);
+            HideSubMenu();
+        }
+
+        private void btn_Intrus_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form_ListIntrus(), btn_Stagiaire);
+            HideSubMenu();
         }
     }
 }

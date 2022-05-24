@@ -71,6 +71,26 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -120,6 +140,12 @@
     </Compile>
     <Compile Include="Form_FaceReco.Designer.cs">
       <DependentUpon>Form_FaceReco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ListIntrus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ListIntrus.Designer.cs">
+      <DependentUpon>Form_ListIntrus.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_LoadFacesToDB.cs">
       <SubType>Form</SubType>
@@ -195,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_FaceReco.resx">
       <DependentUpon>Form_FaceReco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ListIntrus.resx">
+      <DependentUpon>Form_ListIntrus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_LoadFacesToDB.resx">
       <DependentUpon>Form_LoadFacesToDB.cs</DependentUpon>

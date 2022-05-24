@@ -31,31 +31,37 @@ namespace FaceReco
         {
             this.components = new System.ComponentModel.Container();
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.btn_PresenceSheet = new System.Windows.Forms.Button();
-            this.btn_FaceRec = new System.Windows.Forms.Button();
-            this.btn_Stagiaire = new System.Windows.Forms.Button();
-            this.btn_Groupe = new System.Windows.Forms.Button();
-            this.btn_Filieres = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.lbl_Logo = new System.Windows.Forms.Label();
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.btn_Maximize = new System.Windows.Forms.Button();
             this.btn_Minimize = new System.Windows.Forms.Button();
             this.btn_Exit = new System.Windows.Forms.Button();
-            this.btnCloseChildForm = new System.Windows.Forms.Button();
             this.lbl_Title = new System.Windows.Forms.Label();
             this.panelDesktopPane = new System.Windows.Forms.Panel();
             this.MyToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.panelSubMenu = new System.Windows.Forms.Panel();
+            this.btn_Stagiaires = new System.Windows.Forms.Button();
+            this.btn_Intrus = new System.Windows.Forms.Button();
+            this.btnCloseChildForm = new System.Windows.Forms.Button();
+            this.btn_PresenceSheet = new System.Windows.Forms.Button();
+            this.btn_FaceRec = new System.Windows.Forms.Button();
+            this.btn_Stagiaire = new System.Windows.Forms.Button();
+            this.btn_Groupe = new System.Windows.Forms.Button();
+            this.btn_Filieres = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
+            this.panelSubMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
+            this.panelMenu.AutoScroll = true;
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
             this.panelMenu.Controls.Add(this.btn_PresenceSheet);
             this.panelMenu.Controls.Add(this.btn_FaceRec);
+            this.panelMenu.Controls.Add(this.panelSubMenu);
             this.panelMenu.Controls.Add(this.btn_Stagiaire);
             this.panelMenu.Controls.Add(this.btn_Groupe);
             this.panelMenu.Controls.Add(this.btn_Filieres);
@@ -65,106 +71,6 @@ namespace FaceReco
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(220, 504);
             this.panelMenu.TabIndex = 0;
-            // 
-            // btn_PresenceSheet
-            // 
-            this.btn_PresenceSheet.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_PresenceSheet.FlatAppearance.BorderSize = 0;
-            this.btn_PresenceSheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_PresenceSheet.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
-            this.btn_PresenceSheet.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btn_PresenceSheet.Image = global::FaceReco.Properties.Resources.Attendence_Sheet;
-            this.btn_PresenceSheet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_PresenceSheet.Location = new System.Drawing.Point(0, 330);
-            this.btn_PresenceSheet.Name = "btn_PresenceSheet";
-            this.btn_PresenceSheet.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btn_PresenceSheet.Size = new System.Drawing.Size(220, 70);
-            this.btn_PresenceSheet.TabIndex = 4;
-            this.btn_PresenceSheet.Text = "   &Feuille \r\n   Présence";
-            this.btn_PresenceSheet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_PresenceSheet.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_PresenceSheet.UseVisualStyleBackColor = true;
-            this.btn_PresenceSheet.Click += new System.EventHandler(this.btn_PresenceSheet_Click);
-            // 
-            // btn_FaceRec
-            // 
-            this.btn_FaceRec.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_FaceRec.FlatAppearance.BorderSize = 0;
-            this.btn_FaceRec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_FaceRec.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
-            this.btn_FaceRec.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btn_FaceRec.Image = global::FaceReco.Properties.Resources.FaceRec;
-            this.btn_FaceRec.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_FaceRec.Location = new System.Drawing.Point(0, 260);
-            this.btn_FaceRec.Name = "btn_FaceRec";
-            this.btn_FaceRec.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btn_FaceRec.Size = new System.Drawing.Size(220, 70);
-            this.btn_FaceRec.TabIndex = 3;
-            this.btn_FaceRec.Text = "   &Detection\r\n   Présence";
-            this.btn_FaceRec.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_FaceRec.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_FaceRec.UseVisualStyleBackColor = true;
-            this.btn_FaceRec.Click += new System.EventHandler(this.btn_FaceRec_Click);
-            // 
-            // btn_Stagiaire
-            // 
-            this.btn_Stagiaire.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_Stagiaire.FlatAppearance.BorderSize = 0;
-            this.btn_Stagiaire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Stagiaire.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
-            this.btn_Stagiaire.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btn_Stagiaire.Image = global::FaceReco.Properties.Resources.Stagaires;
-            this.btn_Stagiaire.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Stagiaire.Location = new System.Drawing.Point(0, 200);
-            this.btn_Stagiaire.Name = "btn_Stagiaire";
-            this.btn_Stagiaire.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btn_Stagiaire.Size = new System.Drawing.Size(220, 60);
-            this.btn_Stagiaire.TabIndex = 2;
-            this.btn_Stagiaire.Text = "   &Stagiaires";
-            this.btn_Stagiaire.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Stagiaire.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Stagiaire.UseVisualStyleBackColor = true;
-            this.btn_Stagiaire.Click += new System.EventHandler(this.btn_Stagiaire_Click);
-            // 
-            // btn_Groupe
-            // 
-            this.btn_Groupe.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_Groupe.FlatAppearance.BorderSize = 0;
-            this.btn_Groupe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Groupe.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
-            this.btn_Groupe.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btn_Groupe.Image = global::FaceReco.Properties.Resources.Groups;
-            this.btn_Groupe.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Groupe.Location = new System.Drawing.Point(0, 140);
-            this.btn_Groupe.Name = "btn_Groupe";
-            this.btn_Groupe.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btn_Groupe.Size = new System.Drawing.Size(220, 60);
-            this.btn_Groupe.TabIndex = 1;
-            this.btn_Groupe.Text = "   &Groupes";
-            this.btn_Groupe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Groupe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Groupe.UseVisualStyleBackColor = true;
-            this.btn_Groupe.Click += new System.EventHandler(this.btn_Groupe_Click);
-            // 
-            // btn_Filieres
-            // 
-            this.btn_Filieres.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_Filieres.FlatAppearance.BorderSize = 0;
-            this.btn_Filieres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Filieres.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
-            this.btn_Filieres.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btn_Filieres.Image = global::FaceReco.Properties.Resources.Filieres1;
-            this.btn_Filieres.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Filieres.Location = new System.Drawing.Point(0, 80);
-            this.btn_Filieres.Name = "btn_Filieres";
-            this.btn_Filieres.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btn_Filieres.Size = new System.Drawing.Size(220, 60);
-            this.btn_Filieres.TabIndex = 0;
-            this.btn_Filieres.Text = "   &Filières";
-            this.btn_Filieres.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Filieres.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Filieres.UseVisualStyleBackColor = true;
-            this.btn_Filieres.Click += new System.EventHandler(this.btn_Filieres_Click);
             // 
             // panelLogo
             // 
@@ -259,19 +165,6 @@ namespace FaceReco
             this.btn_Exit.UseVisualStyleBackColor = true;
             this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
             // 
-            // btnCloseChildForm
-            // 
-            this.btnCloseChildForm.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCloseChildForm.FlatAppearance.BorderSize = 0;
-            this.btnCloseChildForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseChildForm.Image = global::FaceReco.Properties.Resources.Exit;
-            this.btnCloseChildForm.Location = new System.Drawing.Point(0, 0);
-            this.btnCloseChildForm.Name = "btnCloseChildForm";
-            this.btnCloseChildForm.Size = new System.Drawing.Size(75, 80);
-            this.btnCloseChildForm.TabIndex = 3;
-            this.btnCloseChildForm.UseVisualStyleBackColor = true;
-            this.btnCloseChildForm.Click += new System.EventHandler(this.btnCloseChildForm_Click);
-            // 
             // lbl_Title
             // 
             this.lbl_Title.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -292,6 +185,167 @@ namespace FaceReco
             this.panelDesktopPane.Size = new System.Drawing.Size(614, 424);
             this.panelDesktopPane.TabIndex = 3;
             // 
+            // panelSubMenu
+            // 
+            this.panelSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.panelSubMenu.Controls.Add(this.btn_Intrus);
+            this.panelSubMenu.Controls.Add(this.btn_Stagiaires);
+            this.panelSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSubMenu.Location = new System.Drawing.Point(0, 260);
+            this.panelSubMenu.Name = "panelSubMenu";
+            this.panelSubMenu.Size = new System.Drawing.Size(220, 86);
+            this.panelSubMenu.TabIndex = 0;
+            this.panelSubMenu.Visible = false;
+            // 
+            // btn_Stagiaires
+            // 
+            this.btn_Stagiaires.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.btn_Stagiaires.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Stagiaires.FlatAppearance.BorderSize = 0;
+            this.btn_Stagiaires.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Stagiaires.Font = new System.Drawing.Font("Poppins Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_Stagiaires.ForeColor = System.Drawing.Color.LightGray;
+            this.btn_Stagiaires.Location = new System.Drawing.Point(0, 0);
+            this.btn_Stagiaires.Name = "btn_Stagiaires";
+            this.btn_Stagiaires.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.btn_Stagiaires.Size = new System.Drawing.Size(220, 40);
+            this.btn_Stagiaires.TabIndex = 1;
+            this.btn_Stagiaires.Text = "Stagiaires";
+            this.btn_Stagiaires.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Stagiaires.UseVisualStyleBackColor = false;
+            this.btn_Stagiaires.Click += new System.EventHandler(this.btn_Stagiaires_Click);
+            // 
+            // btn_Intrus
+            // 
+            this.btn_Intrus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.btn_Intrus.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Intrus.FlatAppearance.BorderSize = 0;
+            this.btn_Intrus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Intrus.Font = new System.Drawing.Font("Poppins Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_Intrus.ForeColor = System.Drawing.Color.LightGray;
+            this.btn_Intrus.Location = new System.Drawing.Point(0, 40);
+            this.btn_Intrus.Name = "btn_Intrus";
+            this.btn_Intrus.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.btn_Intrus.Size = new System.Drawing.Size(220, 40);
+            this.btn_Intrus.TabIndex = 2;
+            this.btn_Intrus.Text = "Intrus";
+            this.btn_Intrus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Intrus.UseVisualStyleBackColor = false;
+            this.btn_Intrus.Click += new System.EventHandler(this.btn_Intrus_Click);
+            // 
+            // btnCloseChildForm
+            // 
+            this.btnCloseChildForm.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCloseChildForm.FlatAppearance.BorderSize = 0;
+            this.btnCloseChildForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseChildForm.Image = global::FaceReco.Properties.Resources.Exit;
+            this.btnCloseChildForm.Location = new System.Drawing.Point(0, 0);
+            this.btnCloseChildForm.Name = "btnCloseChildForm";
+            this.btnCloseChildForm.Size = new System.Drawing.Size(75, 80);
+            this.btnCloseChildForm.TabIndex = 3;
+            this.btnCloseChildForm.UseVisualStyleBackColor = true;
+            this.btnCloseChildForm.Click += new System.EventHandler(this.btnCloseChildForm_Click);
+            // 
+            // btn_PresenceSheet
+            // 
+            this.btn_PresenceSheet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_PresenceSheet.FlatAppearance.BorderSize = 0;
+            this.btn_PresenceSheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_PresenceSheet.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
+            this.btn_PresenceSheet.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btn_PresenceSheet.Image = global::FaceReco.Properties.Resources.Attendence_Sheet;
+            this.btn_PresenceSheet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_PresenceSheet.Location = new System.Drawing.Point(0, 416);
+            this.btn_PresenceSheet.Name = "btn_PresenceSheet";
+            this.btn_PresenceSheet.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btn_PresenceSheet.Size = new System.Drawing.Size(220, 70);
+            this.btn_PresenceSheet.TabIndex = 5;
+            this.btn_PresenceSheet.Text = "   &Feuille \r\n   Présence";
+            this.btn_PresenceSheet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_PresenceSheet.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_PresenceSheet.UseVisualStyleBackColor = true;
+            this.btn_PresenceSheet.Click += new System.EventHandler(this.btn_PresenceSheet_Click);
+            // 
+            // btn_FaceRec
+            // 
+            this.btn_FaceRec.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_FaceRec.FlatAppearance.BorderSize = 0;
+            this.btn_FaceRec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_FaceRec.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
+            this.btn_FaceRec.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btn_FaceRec.Image = global::FaceReco.Properties.Resources.FaceRec;
+            this.btn_FaceRec.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_FaceRec.Location = new System.Drawing.Point(0, 346);
+            this.btn_FaceRec.Name = "btn_FaceRec";
+            this.btn_FaceRec.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btn_FaceRec.Size = new System.Drawing.Size(220, 70);
+            this.btn_FaceRec.TabIndex = 4;
+            this.btn_FaceRec.Text = "   &Detection\r\n   Présence";
+            this.btn_FaceRec.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_FaceRec.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_FaceRec.UseVisualStyleBackColor = true;
+            this.btn_FaceRec.Click += new System.EventHandler(this.btn_FaceRec_Click);
+            // 
+            // btn_Stagiaire
+            // 
+            this.btn_Stagiaire.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Stagiaire.FlatAppearance.BorderSize = 0;
+            this.btn_Stagiaire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Stagiaire.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
+            this.btn_Stagiaire.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btn_Stagiaire.Image = global::FaceReco.Properties.Resources.Stagaires;
+            this.btn_Stagiaire.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Stagiaire.Location = new System.Drawing.Point(0, 200);
+            this.btn_Stagiaire.Name = "btn_Stagiaire";
+            this.btn_Stagiaire.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btn_Stagiaire.Size = new System.Drawing.Size(220, 60);
+            this.btn_Stagiaire.TabIndex = 2;
+            this.btn_Stagiaire.Text = "   &Stagiaires";
+            this.btn_Stagiaire.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Stagiaire.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Stagiaire.UseVisualStyleBackColor = true;
+            this.btn_Stagiaire.Click += new System.EventHandler(this.btn_Stagiaire_Click);
+            // 
+            // btn_Groupe
+            // 
+            this.btn_Groupe.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Groupe.FlatAppearance.BorderSize = 0;
+            this.btn_Groupe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Groupe.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
+            this.btn_Groupe.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btn_Groupe.Image = global::FaceReco.Properties.Resources.Groups;
+            this.btn_Groupe.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Groupe.Location = new System.Drawing.Point(0, 140);
+            this.btn_Groupe.Name = "btn_Groupe";
+            this.btn_Groupe.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btn_Groupe.Size = new System.Drawing.Size(220, 60);
+            this.btn_Groupe.TabIndex = 1;
+            this.btn_Groupe.Text = "   &Groupes";
+            this.btn_Groupe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Groupe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Groupe.UseVisualStyleBackColor = true;
+            this.btn_Groupe.Click += new System.EventHandler(this.btn_Groupe_Click);
+            // 
+            // btn_Filieres
+            // 
+            this.btn_Filieres.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Filieres.FlatAppearance.BorderSize = 0;
+            this.btn_Filieres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Filieres.Font = new System.Drawing.Font("Poppins SemiBold", 13F, System.Drawing.FontStyle.Bold);
+            this.btn_Filieres.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btn_Filieres.Image = global::FaceReco.Properties.Resources.Filieres1;
+            this.btn_Filieres.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Filieres.Location = new System.Drawing.Point(0, 80);
+            this.btn_Filieres.Name = "btn_Filieres";
+            this.btn_Filieres.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btn_Filieres.Size = new System.Drawing.Size(220, 60);
+            this.btn_Filieres.TabIndex = 0;
+            this.btn_Filieres.Text = "   &Filières";
+            this.btn_Filieres.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Filieres.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Filieres.UseVisualStyleBackColor = true;
+            this.btn_Filieres.Click += new System.EventHandler(this.btn_Filieres_Click);
+            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,6 +364,7 @@ namespace FaceReco
             this.panelLogo.PerformLayout();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
+            this.panelSubMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -332,6 +387,9 @@ namespace FaceReco
         private System.Windows.Forms.Button btn_Maximize;
         private System.Windows.Forms.Button btn_Minimize;
         private System.Windows.Forms.ToolTip MyToolTip;
+        private System.Windows.Forms.Panel panelSubMenu;
+        private System.Windows.Forms.Button btn_Intrus;
+        private System.Windows.Forms.Button btn_Stagiaires;
     }
 }
 

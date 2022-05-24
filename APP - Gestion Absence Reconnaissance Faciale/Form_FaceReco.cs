@@ -167,12 +167,13 @@ namespace FaceReco
                         var d = DateTime.Now;
                         String fileName = $"Inconnu {d.Year}{d.Month}{d.Day}{d.Hour}{d.Minute}{d.Second}{d.Millisecond}.png";
 
-                        addToPresenceHistory(strEncod: String.Join(",", encd.First().GetRawEncoding()), dt: d, cef: fileName.Replace(".png", ""));
+                        addToPresenceHistory(strEncod: String.Join(",", encd.First().GetRawEncoding()), dt: d, idIntr: fileName.Replace(".png", ""));
 
 
                         Intruder s = new Intruder();
                         s.idIntr = fileName.Replace(".png", "");
                         s.stringEncod = String.Join(",", encd.First().GetRawEncoding());
+                        s.isUnknown = true;
                         if (Program.dc.Intruders.Count() != 0 || !Program.dc.Intruders.Any(obj => obj.idIntr == s.idIntr))
                         {
                             Program.dc.Intruders.Add(s);
@@ -191,7 +192,7 @@ namespace FaceReco
                 }
             }
         }
-        void addToPresenceHistory(string strEncod = "", DateTime? dt = null, string cef = "")
+        void addToPresenceHistory(string strEncod = "", DateTime? dt = null, string idIntr = "")
         {
             try
             {
@@ -203,21 +204,28 @@ namespace FaceReco
                 }
                 var entity = new presenceHistory();
                 var Stgr = Program.dc.Stagiaires.FirstOrDefault(obj => obj.stringEncod == strEncod);
-                var Intrud = Stgr == null ? Program.dc.Intruders.FirstOrDefault(obj => obj.stringEncod == strEncod) : null;
+
                 entity.dateHistory = dt == null ? DateTime.Now : dt.Value;
 
-                if (Intrud != null)
+                if (Stgr != null)
                 {
+                    entity.cef = Stgr.CEF;
 
-                    entity.idIntr = cef != "" ? cef : Intrud.idIntr;
+                    if (!tempPresenceHistories.Any(e => e.cef == entity.cef))
+                    {
+                        tempPresenceHistories.Add(entity);
+                    }
                 }
-                if (Intrud != null)
-                    entity.idIntr = cef != "" ? cef : Intrud.idIntr;
-                else if (Stgr != null)
-                    entity.cef = cef != "" ? cef : Stgr.CEF;
-                if (!tempPresenceHistories.Any(e => e.cef == entity.cef || e.idIntr == entity.idIntr))
+                else
                 {
-                    tempPresenceHistories.Add(entity);
+                    var Intrud = Program.dc.Intruders.FirstOrDefault(obj => obj.stringEncod == strEncod);
+
+                    entity.idIntr = idIntr != "" ? idIntr : Intrud.idIntr;
+                    if (!tempPresenceHistories.Any(e => e.idIntr == entity.idIntr))
+                    {
+                        tempPresenceHistories.Add(entity);
+                    }
+
                 }
             }
             catch (Exception)
@@ -286,6 +294,7 @@ namespace FaceReco
                 {
                     var p = new presenceHistory();
                     p.cef = item.cef;
+                    p.idIntr = item.idIntr;
                     p.dateHistory = item.dateHistory;
                     p.Stagiaire = item.Stagiaire;
                     //p.Intruder = item.Intruder;
